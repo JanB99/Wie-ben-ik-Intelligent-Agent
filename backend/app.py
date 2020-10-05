@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import main
 import csv
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 with open("dataset.csv", 'r', newline='') as file:
     reader = csv.reader(file)
