@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import main
-import csv
+import csv, random
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -16,14 +16,15 @@ with open("dataset.csv", 'r', newline='') as file:
     del dataset[0]
 
 
-tree = main.Tree(dataset)
-ai = tree.root
 
+# ai = tree.root
+tree = None
 playerCharacter = None
+aiCharacter = None
 name = ''
 
 
-@app.route('/', methods=['GET'])
+@app.route('/tree', methods=['GET'])
 def index():
     return jsonify(tree.toJson())
 
@@ -41,11 +42,21 @@ def characters():
 
 @app.route('/character', methods=['GET', 'POST'])
 def setCharacter():
-    global playerCharacter
+    global playerCharacter, aiCharacter, tree
 
     arg = request.args.get('num')
     if arg and int(arg) < len(dataset) and int(arg) >= 0:
-        playerCharacter = dataset[int(arg)]
+        if playerCharacter == None:
+            playerCharacter = dataset.pop(int(arg))
+            aiCharacter = dataset.pop(random.randint(0, len(dataset)))
+        else:
+            dataset.append(playerCharacter)
+            playerCharacter = dataset.pop(int(arg))
+            dataset.append(aiCharacter)
+            aiCharacter = dataset.pop(random.randint(0, len(dataset)))
+        
+        print(aiCharacter)
+        tree = main.Tree(dataset)
     
     return jsonify(playerCharacter)
 
@@ -67,21 +78,21 @@ def postQuestion():
 def getImage():
     return send_file('tijger.jpg', mimetype='image/jpg')
 
-@app.route('/next', methods=['GET', 'POST'])
-def ask():
+# @app.route('/next', methods=['GET', 'POST'])
+# def ask():
 
-    global ai
+#     global ai
 
-    answer = request.args.get('answer')
+#     answer = request.args.get('answer')
 
-    if answer == '1':
-        ai = ai.true_branch
-        return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
-    elif answer == '0':
-        ai = ai.false_branch
-        return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
-    else:
-        return answer
+#     if answer == '1':
+#         ai = ai.true_branch
+#         return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
+#     elif answer == '0':
+#         ai = ai.false_branch
+#         return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
+#     else:
+#         return answer
 
 
 app.run()
