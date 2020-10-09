@@ -1,7 +1,15 @@
 <template>
   <div class="hello">
+
+    <div v-if="turn % 2 == 1">
+      <h2>AI vraagt:</h2>
+      <h3>{{ aiQuestion ? aiQuestion.question : null }}</h3>
+      <button @click="postAiQuestion(1)">True</button>
+      <button @click="postAiQuestion(0)">False</button>
+    </div>
+
     <h1>{{ player }}</h1>
-    <div>
+    <div v-if="turn % 2 == 0 && player">
       <select v-model="selectedLabel" @change="getValues">
         <option v-for="label in labels" :key="label">
           {{ label }}
@@ -29,7 +37,9 @@
 
     <div>
       <ul v-for="(char, index) in data" :key="index">
-        {{index + char[char.length - 1]}}
+        {{
+          index + char[char.length - 1]
+        }}
       </ul>
     </div>
   </div>
@@ -48,6 +58,8 @@ export default {
       selectedValue: "",
       labels: [],
       values: [],
+      aiQuestion: null,
+      turn: 0
     };
   },
   methods: {
@@ -82,8 +94,27 @@ export default {
         )
         .then((res) => {
           console.log(res.data);
+          this.turn++;
         });
-      this.getAllCharacters()
+      this.getAllCharacters();
+      this.getAiQuestion();
+    },
+    getAiQuestion() {
+      axios.get(`http://127.0.0.1:5000/aiquestion`).then((res) => {
+        this.aiQuestion = res.data;
+      });
+    },
+    postAiQuestion(answer) {
+      axios
+        .get(`http://127.0.0.1:5000/aiquestion?answer=${answer}`)
+        .then((res) => {
+          console.log(res.data);
+          this.aiQuestion = null
+          this.turn++;
+          this.selectedLabel = ""
+          this.selectedValue = ""
+          this.values = []
+        });
     },
   },
   created() {

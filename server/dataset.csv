@@ -1,4 +1,4 @@
-hair_color,hair,eye_color,facial_hair,gender,has_glasses,has_earrings,has_hat,is_balding,label
+hair_color,hair,eye_color,facial_hair,gender,has_glasses,has_earrings,has_hat,is_balding,name
 black,short,brown,mustache,male,no,no,no,no,Alex
 orange,long,blue,mustache,male,no,no,no,no,Alfred
 blonde,long,blue,none,female,no,no,no,no,Anita

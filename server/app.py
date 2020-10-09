@@ -23,7 +23,7 @@ tree = None
 playerCharacter = None
 
 aiCharacter = None
-name = ''
+# name = ''
 
 
 @app.route('/tree', methods=['GET'])
@@ -48,8 +48,10 @@ def setCharacter():
 
     arg = request.args.get('num')
     if arg and int(arg) < len(dataset) and int(arg) >= 0:
-        # if playerCharacter == None:
-        #     # playerCharacter = playerDataset.pop(int(arg))
+        if playerCharacter == None:
+            playerCharacter = playerDataset.pop(int(arg))
+            aiCharacter = playerDataset[random.randint(0, len(playerDataset)-1)]
+            dataset.pop(playerDataset.index(aiCharacter))
         #     # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
 
         #     # aiCharacter = dataset.pop(int(arg))
@@ -63,13 +65,13 @@ def setCharacter():
 
             # aiCharacter = dataset.pop(int(arg))
 
-        playerCharacter = playerDataset[int(arg)]
-        aiCharacter = dataset[int(arg)]
+        # playerCharacter = playerDataset[int(arg)]
+        # aiCharacter = dataset[int(arg)]
 
         print(aiCharacter)
         tree = main.Tree(dataset)
     
-    return jsonify(playerCharacter)
+    return jsonify(playerCharacter, aiCharacter)
 
 @app.route('/labels', methods=['GET'])
 def getLabels():
@@ -77,9 +79,9 @@ def getLabels():
 
 @app.route('/values', methods=['GET', 'POST'])
 def getValues():
-
+    label = request.args.get('label')
     if 'label' in request.args:
-        return jsonify(list({x[headers.index(request.args.get('label'))] for x in dataset}))
+        return jsonify(list({x[headers.index(label)] for x in playerDataset}))
 
 @app.route('/question', methods=['GET'])
 def postQuestion():
@@ -89,10 +91,12 @@ def postQuestion():
     label = request.args.get('label')
     value = request.args.get('value')
 
-    true_branch, _ = main.partition(playerDataset, main.Question(headers.index(label), value))
+    true_branch, false_branch = main.partition(playerDataset, main.Question(headers.index(label), value))
     
     if aiCharacter[headers.index(label)] == value:
         playerDataset = true_branch
+    else:
+        playerDataset = false_branch
     
     return jsonify(playerDataset) 
 
@@ -100,6 +104,18 @@ def postQuestion():
 @app.route('/image', methods=['GET'])
 def getImage():
     return send_file('tijger.jpg', mimetype='image/jpg')
+
+@app.route('/aiquestion', methods=['GET'])
+def getAiQuestion():
+
+    answer = request.args.get('answer')
+
+    if answer == '1':
+        tree.root = tree.root.true_branch
+    elif answer == '0':
+        tree.root = tree.root.false_branch
+
+    return jsonify(tree.getQuestion())
 
 # @app.route('/next', methods=['GET', 'POST'])
 # def ask():

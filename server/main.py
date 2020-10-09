@@ -25,7 +25,13 @@ class Question:
 
     def __repr__(self):
         return "is {} {} {}?".format(headers[self.column], ">=" if self.is_int() else "==", self.value)
-    
+
+    def toJson(self):
+        return {
+            "question": self.__repr__(),
+            "label": headers[self.column],
+            "value": self.value
+        }
 
 
 def partition(rows, question):
@@ -167,6 +173,12 @@ class Tree:
 
     def toJson(self):
         return self.root.toJson() 
+    
+    def getQuestion(self):
+        if isinstance(self.root, Node):
+            return self.root.question.toJson()
+        else:
+            return self.root.toJson()
 
 
 
