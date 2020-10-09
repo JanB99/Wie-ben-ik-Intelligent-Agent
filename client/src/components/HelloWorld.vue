@@ -7,16 +7,31 @@
           {{ label }}
         </option>
       </select>
+      ==
       <select v-model="selectedValue">
         <option v-for="value in values" :key="value">
           {{ value }}
         </option>
       </select>
+      ?
+      <button @click="askQuestion" :disabled="selectedValue == ''">
+        ask question
+      </button>
     </div>
 
-    <ul v-for="(char, index) in data" :key="index">
-      <button @click="setCharacter(index)">{{ char[char.length - 1] }}</button>
-    </ul>
+    <div v-if="player == null">
+      <ul v-for="(char, index) in data" :key="index">
+        <button @click="setCharacter(index)">
+          {{ index }} {{ char[char.length - 1] }}
+        </button>
+      </ul>
+    </div>
+
+    <div>
+      <ul v-for="(char, index) in data" :key="index">
+        {{index + char[char.length - 1]}}
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -53,9 +68,22 @@ export default {
       });
     },
     getValues() {
-      axios.get(`http://127.0.0.1:5000/values?label=${this.selectedLabel}`).then((res) => {
-        this.values = res.data;
-      });
+      axios
+        .get(`http://127.0.0.1:5000/values?label=${this.selectedLabel}`)
+        .then((res) => {
+          this.values = res.data;
+        });
+      this.selectedValue = "";
+    },
+    askQuestion() {
+      axios
+        .get(
+          `http://127.0.0.1:5000/question?label=${this.selectedLabel}&value=${this.selectedValue}`
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
+      this.getAllCharacters()
     },
   },
   created() {

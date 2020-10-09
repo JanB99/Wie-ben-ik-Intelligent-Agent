@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import main
-import csv, random
+import csv, random, copy
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -11,15 +11,17 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 with open("dataset.csv", 'r', newline='') as file:
     reader = csv.reader(file)
-    dataset = [row for (index, row) in enumerate(reader)]
+    playerDataset = [row for (index, row) in enumerate(reader)]
+    dataset = copy.deepcopy(playerDataset)
     headers = dataset[0]
-    del dataset[0]
+    del dataset[0], playerDataset[0]
 
 
 
 # ai = tree.root
 tree = None
 playerCharacter = None
+
 aiCharacter = None
 name = ''
 
@@ -28,17 +30,17 @@ name = ''
 def index():
     return jsonify(tree.toJson())
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    global name
-    if request.args.get('name'):
-        name = request.args.get('name')
+# @app.route('/test', methods=['GET', 'POST'])
+# def test():
+#     global name
+#     if request.args.get('name'):
+#         name = request.args.get('name')
 
-    return jsonify(name)
+#     return jsonify(name)
 
 @app.route('/getAllCharacters', methods=['GET'])
 def characters():
-    return jsonify(dataset)
+    return jsonify(playerDataset)
 
 @app.route('/character', methods=['GET', 'POST'])
 def setCharacter():
@@ -46,15 +48,24 @@ def setCharacter():
 
     arg = request.args.get('num')
     if arg and int(arg) < len(dataset) and int(arg) >= 0:
-        if playerCharacter == None:
-            playerCharacter = dataset.pop(int(arg))
-            aiCharacter = dataset.pop(random.randint(0, len(dataset)))
-        else:
-            dataset.append(playerCharacter)
-            playerCharacter = dataset.pop(int(arg))
-            dataset.append(aiCharacter)
-            aiCharacter = dataset.pop(random.randint(0, len(dataset)))
-        
+        # if playerCharacter == None:
+        #     # playerCharacter = playerDataset.pop(int(arg))
+        #     # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
+
+        #     # aiCharacter = dataset.pop(int(arg))
+
+        # else:
+            # playerDataset.append(playerCharacter)
+            # playerCharacter = playerDataset.pop(int(arg))
+            
+            # dataset.append(aiCharacter)
+            # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
+
+            # aiCharacter = dataset.pop(int(arg))
+
+        playerCharacter = playerDataset[int(arg)]
+        aiCharacter = dataset[int(arg)]
+
         print(aiCharacter)
         tree = main.Tree(dataset)
     
@@ -70,9 +81,21 @@ def getValues():
     if 'label' in request.args:
         return jsonify(list({x[headers.index(request.args.get('label'))] for x in dataset}))
 
-@app.route('/question', methods=['GET', 'POST'])
+@app.route('/question', methods=['GET'])
 def postQuestion():
-    pass
+
+    global playerDataset
+
+    label = request.args.get('label')
+    value = request.args.get('value')
+
+    true_branch, _ = main.partition(playerDataset, main.Question(headers.index(label), value))
+    
+    if aiCharacter[headers.index(label)] == value:
+        playerDataset = true_branch
+    
+    return jsonify(playerDataset) 
+
 
 @app.route('/image', methods=['GET'])
 def getImage():
