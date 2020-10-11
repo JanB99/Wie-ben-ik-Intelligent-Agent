@@ -1,15 +1,19 @@
 <template>
   <div class="hello">
-
-    <img src="http://127.0.0.1:5000/image?id=10" >
+    <!-- <h1 v-if="ai">AI: {{ ai ? ai[ai.length - 2] : null }}</h1> -->
+    <h1 v-if="answer"> AI zegt: {{answer}} </h1>
     <div v-if="turn % 2 == 1">
       <h2>AI vraagt:</h2>
-      <h3>{{ aiQuestion ? aiQuestion.question : null }}</h3>
+      <h3>{{ aiQuestion }}</h3>
       <button @click="postAiQuestion(1)">True</button>
       <button @click="postAiQuestion(0)">False</button>
     </div>
 
-    <h1>{{ player }}</h1>
+    <div v-if="player">
+      <h1>player: {{ player ? player[player.length - 2] : null }}</h1>
+      <img :src="getImage(player[player.length - 1])" />
+    </div>
+
     <div v-if="turn % 2 == 0 && player">
       <select v-model="selectedLabel" @change="getValues">
         <option v-for="label in labels" :key="label">
@@ -37,11 +41,12 @@
       </ul>
     </div>
 
-    <div>
+    <div v-else>
       <ul v-for="(char, index) in data" :key="index">
         {{
-          index + char[char.length - 2]
+          char[char.length - 2]
         }}
+        <img :src="getImage(char[char.length - 1])" height="100"/>
       </ul>
     </div>
   </div>
@@ -56,12 +61,14 @@ export default {
     return {
       data: null,
       player: null,
+      ai: null,
       selectedLabel: "",
       selectedValue: "",
       labels: [],
       values: [],
       aiQuestion: null,
-      turn: 0
+      turn: 0,
+      answer: null
     };
   },
   methods: {
@@ -72,13 +79,14 @@ export default {
     },
     setCharacter(index) {
       axios.get(`http://127.0.0.1:5000/character?num=${index}`).then((res) => {
-        this.player = res.data;
+        this.player = res.data[0];
+        this.ai = res.data[1];
       });
       this.getAllCharacters();
     },
     getLabels() {
       axios.get("http://127.0.0.1:5000/labels").then((res) => {
-        this.labels = res.data;
+        this.labels = res.data.slice(0, res.data.length-1);
       });
     },
     getValues() {
@@ -103,24 +111,27 @@ export default {
     },
     getAiQuestion() {
       axios.get(`http://127.0.0.1:5000/aiquestion`).then((res) => {
-        this.aiQuestion = res.data;
+        this.aiQuestion = res.data.question;
       });
     },
     postAiQuestion(answer) {
       axios
         .get(`http://127.0.0.1:5000/aiquestion?answer=${answer}`)
         .then((res) => {
+          if (res.data.type){
+            this.answer = res.data.prob
+          }
           console.log(res.data);
-          this.aiQuestion = null
+          this.aiQuestion = null;
           this.turn++;
-          this.selectedLabel = ""
-          this.selectedValue = ""
-          this.values = []
+          this.selectedLabel = "";
+          this.selectedValue = "";
+          this.values = [];
         });
     },
-    getImage(id){
-      return `http://127.0.0.1:5000/image?id=${id}`
-    }
+    getImage(id) {
+      return `http://127.0.0.1:5000/images?id=${id}`;
+    },
   },
   created() {
     this.getAllCharacters();

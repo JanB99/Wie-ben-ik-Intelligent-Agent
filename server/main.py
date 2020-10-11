@@ -1,6 +1,6 @@
 import csv
 import math
-
+import random
 
 class Question:
     def __init__(self, col, value):
@@ -69,15 +69,15 @@ def information_gain(current, left, right):
     # gini is ook een methode om disorder te meten
 
     p = len(left) / (len(left) + len(right))
-    return current - p * gini(left) - (1-p) * gini(right)
+    # return current - p * gini(left) - (1-p) * gini(right)
 
     # ff mee stoeien
-    # if p == 0:
-    #     return - (1-p) * math.log2(1-p)
-    # elif (1-p) == 0:
-    #     return - p * math.log2(p)
-    # else:
-    #     return - p * math.log2(p) - (1-p) * math.log2(1-p)
+    if p == 0:
+        return - (1-p) * math.log2(1-p)
+    elif (1-p) == 0:
+        return - p * math.log2(p)
+    else:
+        return - p * math.log2(p) - (1-p) * math.log2(1-p)
 
 
 def find_best_question(rows):
@@ -108,10 +108,12 @@ def find_best_question(rows):
 
 
 class Node:
-    def __init__(self, question, true_branch, false_branch):
+    def __init__(self, question, true_branch, false_branch, prob, rows):
         self.question = question
         self.true_branch = true_branch
         self.false_branch = false_branch
+        self.prob = prob
+        self.rows = rows
 
     def print(self, spacing, boolean):
         print(spacing, ">", self.question)
@@ -120,9 +122,11 @@ class Node:
     
     def toJson(self):
         return {
+            'prob': self.prob,
             'question': self.question.__repr__(),
             'true_branch': self.true_branch.toJson(),
-            'false_branch': self.false_branch.toJson()
+            'false_branch': self.false_branch.toJson(),
+            'rows': self.rows
         }
 
 class Leaf:
@@ -137,7 +141,8 @@ class Leaf:
     
     def toJson(self):
         return {
-            'prob' : self.probabilities
+            'type': 'leaf', 
+            'prob': self.probabilities
         }
 
 
@@ -154,7 +159,8 @@ class Tree:
 
         true_branch = self.create_tree(true_rows)
         false_branch = self.create_tree(false_rows)
-        return Node(question, true_branch, false_branch)
+        prob = 1 - (len(rows)/len(dataset))
+        return Node(question, true_branch, false_branch, prob, rows)
 
     def print_tree(self):
         self.root.print("", "")
@@ -180,6 +186,14 @@ class Tree:
         else:
             return self.root.toJson()
 
+    def guess(self, threshold):
+        if isinstance(self.root, Node) and self.root.prob >= threshold:
+            guess = random.choice(self.root.rows)
+            nameIndex = headers.index('name')
+            self.root.rows.remove(guess)
+            return Question(nameIndex, guess[nameIndex]).toJson()
+        else:
+            return None
 
 
 with open("dataset.csv", 'r', newline='') as file:

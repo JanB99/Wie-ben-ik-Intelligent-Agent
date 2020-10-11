@@ -18,8 +18,8 @@ with open("dataset.csv", 'r', newline='') as file:
 
 tree = None
 playerCharacter = None
-
 aiCharacter = None
+factor = 0.7
 
 
 @app.route('/tree', methods=['GET'])
@@ -89,39 +89,37 @@ def postQuestion():
     return jsonify(playerDataset) 
 
 
-@app.route('/image', methods=['GET'])
+@app.route('/images', methods=['GET'])
 def getImage():
     idChar = request.args.get('id')
-    print(idChar)
-    return send_file('images/Asset {}.png'.format(idChar), mimetype='image/png')
+    return send_file('images/Asset {}.png'.format(idChar), mimetype='image/png', as_attachment=True, cache_timeout=0)
+
+@app.route('/test', methods=['GET'])
+def test():
+    return send_file('images/Asset 10.png', mimetype='image/png')
 
 @app.route('/aiquestion', methods=['GET'])
 def getAiQuestion():
 
+    global tree
     answer = request.args.get('answer')
 
+    # guess = tree.guess(factor)
+    # if guess:
+
+    #     if answer == '0':
+    #         tree = main.Tree(tree.root.rows)
+    #         guess = tree.guess(factor)
+    #         return jsonify(guess)
+    #     elif answer == '1':
+    #         return 'AI WINT :P'
+    # else:
     if answer == '1':
         tree.root = tree.root.true_branch
     elif answer == '0':
         tree.root = tree.root.false_branch
 
+    
     return jsonify(tree.getQuestion())
-
-# @app.route('/next', methods=['GET', 'POST'])
-# def ask():
-
-#     global ai
-
-#     answer = request.args.get('answer')
-
-#     if answer == '1':
-#         ai = ai.true_branch
-#         return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
-#     elif answer == '0':
-#         ai = ai.false_branch
-#         return ai.question.__repr__() if isinstance(ai, main.Node) else ai.probabilities
-#     else:
-#         return answer
-
 
 app.run()
