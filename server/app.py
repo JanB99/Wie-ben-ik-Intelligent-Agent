@@ -16,27 +16,15 @@ with open("dataset.csv", 'r', newline='') as file:
     headers = dataset[0]
     del dataset[0], playerDataset[0]
 
-
-
-# ai = tree.root
 tree = None
 playerCharacter = None
 
 aiCharacter = None
-# name = ''
 
 
 @app.route('/tree', methods=['GET'])
 def index():
     return jsonify(tree.toJson())
-
-# @app.route('/test', methods=['GET', 'POST'])
-# def test():
-#     global name
-#     if request.args.get('name'):
-#         name = request.args.get('name')
-
-#     return jsonify(name)
 
 @app.route('/getAllCharacters', methods=['GET'])
 def characters():
@@ -103,7 +91,9 @@ def postQuestion():
 
 @app.route('/image', methods=['GET'])
 def getImage():
-    return send_file('tijger.jpg', mimetype='image/jpg')
+    idChar = request.args.get('id')
+    print(idChar)
+    return send_file('images/Asset {}.png'.format(idChar), mimetype='image/png')
 
 @app.route('/aiquestion', methods=['GET'])
 def getAiQuestion():

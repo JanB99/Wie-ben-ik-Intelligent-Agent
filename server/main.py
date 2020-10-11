@@ -48,7 +48,7 @@ def partition(rows, question):
 def count_classes(rows):
     counts = {}
     for row in rows:
-        label = row[-1]
+        label = row[headers.index("name")]
         if label not in counts:
             counts[label] = 0
         counts[label] += 1
@@ -69,15 +69,15 @@ def information_gain(current, left, right):
     # gini is ook een methode om disorder te meten
 
     p = len(left) / (len(left) + len(right))
-    # return current - p * gini(left) - (1-p) * gini(right)
+    return current - p * gini(left) - (1-p) * gini(right)
 
     # ff mee stoeien
-    if p == 0:
-        return - (1-p) * math.log2(1-p)
-    elif (1-p) == 0:
-        return - p * math.log2(p)
-    else:
-        return - p * math.log2(p) - (1-p) * math.log2(1-p)
+    # if p == 0:
+    #     return - (1-p) * math.log2(1-p)
+    # elif (1-p) == 0:
+    #     return - p * math.log2(p)
+    # else:
+    #     return - p * math.log2(p) - (1-p) * math.log2(1-p)
 
 
 def find_best_question(rows):
@@ -85,7 +85,7 @@ def find_best_question(rows):
     best_gain = 0
     current = gini(rows)
 
-    num_features = len(rows[0])-1
+    num_features = len(rows[0])-2
 
     for col in range(num_features):
 
@@ -185,7 +185,7 @@ class Tree:
 with open("dataset.csv", 'r', newline='') as file:
     reader = csv.reader(file)
     dataset = [row for (index, row) in enumerate(reader)]
-    headers = dataset[0]
+    headers = dataset[0][0:-1]
     del dataset[0]
 
 # headers = ["haircolor", "job", "gender", "age", "label"]
@@ -222,20 +222,20 @@ with open("dataset.csv", 'r', newline='') as file:
 # tree.predict(test[0], tree.root)
 
 
-def ask(root):
+# def ask(root):
 
-    if isinstance(root, Leaf):
-        print("\n", root.probabilities)
-        return
+#     if isinstance(root, Leaf):
+#         print("\n", root.probabilities)
+#         return
 
-    print(root.question)
+#     print(root.question)
 
-    answer = bool(int(input("input (True, 1 or False, 0): ")))
+#     answer = bool(int(input("input (True, 1 or False, 0): ")))
 
-    if answer:
-        ask(root.true_branch)
-    else:
-        ask(root.false_branch)
+#     if answer:
+#         ask(root.true_branch)
+#     else:
+#         ask(root.false_branch)
 
 
 # ask(tree.root)

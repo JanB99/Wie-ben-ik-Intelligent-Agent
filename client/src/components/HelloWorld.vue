@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
 
+    <img src="http://127.0.0.1:5000/image?id=10" >
     <div v-if="turn % 2 == 1">
       <h2>AI vraagt:</h2>
       <h3>{{ aiQuestion ? aiQuestion.question : null }}</h3>
@@ -30,7 +31,8 @@
     <div v-if="player == null">
       <ul v-for="(char, index) in data" :key="index">
         <button @click="setCharacter(index)">
-          {{ index }} {{ char[char.length - 1] }}
+          {{ index }} {{ char[char.length - 2] }}
+          <img :src="getImage(char[char.length - 1])" />
         </button>
       </ul>
     </div>
@@ -38,7 +40,7 @@
     <div>
       <ul v-for="(char, index) in data" :key="index">
         {{
-          index + char[char.length - 1]
+          index + char[char.length - 2]
         }}
       </ul>
     </div>
@@ -116,6 +118,9 @@ export default {
           this.values = []
         });
     },
+    getImage(id){
+      return `http://127.0.0.1:5000/image?id=${id}`
+    }
   },
   created() {
     this.getAllCharacters();
