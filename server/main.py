@@ -159,7 +159,7 @@ class Tree:
 
         true_branch = self.create_tree(true_rows)
         false_branch = self.create_tree(false_rows)
-        prob = 1 - (len(rows)/len(dataset))
+        prob = 1/len(rows)
         return Node(question, true_branch, false_branch, prob, rows)
 
     def print_tree(self):

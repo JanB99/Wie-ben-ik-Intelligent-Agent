@@ -19,7 +19,7 @@ with open("dataset.csv", 'r', newline='') as file:
 tree = None
 playerCharacter = None
 aiCharacter = None
-factor = 0.7
+factor = 0.5
 
 
 @app.route('/tree', methods=['GET'])
