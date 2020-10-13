@@ -1,151 +1,142 @@
 <template>
   <v-container>
+    <h1 v-if="answer">AI zegt: {{ answer }}</h1>
+    <div v-if="turn % 2 == 1">
+      <h2>AI vraagt:</h2>
+      <h3>{{ aiQuestion }}</h3>
+      <button @click="postAiQuestion(1)">True</button>
+      <button @click="postAiQuestion(0)">False</button>
+    </div>
+
+    <div v-if="player">
+      <h1>player: {{ player ? player[player.length - 2] : null }}</h1>
+      <img :src="getImage(player[player.length - 1])" />
+    </div>
+
+    <div v-if="turn % 2 == 0 && player">
+      <select v-model="selectedLabel" @change="getValues">
+        <option v-for="label in labels" :key="label">
+          {{ label }}
+        </option>
+      </select>
+      ==
+      <select v-model="selectedValue">
+        <option v-for="value in values" :key="value">
+          {{ value }}
+        </option>
+      </select>
+      ?
+      <button @click="askQuestion" :disabled="selectedValue == ''">
+        ask question
+      </button>
+    </div>
+
     <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+      <div v-if="player == null">
+        <ul v-for="(char, index) in data" :key="index">
+          <button @click="setCharacter(index)">
+            {{ index }} {{ char[char.length - 2] }}
+            <img :src="getImage(char[char.length - 1])" />
+          </button>
+        </ul>
+      </div>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
+      <div v-else>
+        <ul v-for="(char, index) in data" :key="index">
+          {{
+            char[char.length - 2]
+          }}
+          <img :src="getImage(char[char.length - 1])" height="100" />
+        </ul>
+      </div>
     </v-row>
   </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
+import axios from "axios";
 
-    data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
-      ],
-    }),
-  }
+export default {
+  name: "HelloWorld",
+  data() {
+    return {
+      data: null,
+      player: null,
+      ai: null,
+      selectedLabel: "",
+      selectedValue: "",
+      labels: [],
+      values: [],
+      aiQuestion: null,
+      turn: 0,
+      answer: null,
+    };
+  },
+  methods: {
+    getAllCharacters() {
+      axios.get("http://127.0.0.1:5000/getAllCharacters").then((res) => {
+        this.data = res.data;
+      });
+    },
+    setCharacter(index) {
+      axios.get(`http://127.0.0.1:5000/character?num=${index}`).then((res) => {
+        this.player = res.data[0];
+        this.ai = res.data[1];
+      });
+      this.getAllCharacters();
+    },
+    getLabels() {
+      axios.get("http://127.0.0.1:5000/labels").then((res) => {
+        this.labels = res.data.slice(0, res.data.length - 1);
+      });
+    },
+    getValues() {
+      axios
+        .get(`http://127.0.0.1:5000/values?label=${this.selectedLabel}`)
+        .then((res) => {
+          this.values = res.data;
+        });
+      this.selectedValue = "";
+    },
+    askQuestion() {
+      axios
+        .get(
+          `http://127.0.0.1:5000/question?label=${this.selectedLabel}&value=${this.selectedValue}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          this.turn++;
+        });
+      this.getAllCharacters();
+      this.getAiQuestion();
+    },
+    getAiQuestion() {
+      axios.get(`http://127.0.0.1:5000/aiquestion`).then((res) => {
+        this.aiQuestion = res.data.question;
+      });
+    },
+    postAiQuestion(answer) {
+      axios
+        .get(`http://127.0.0.1:5000/aiquestion?answer=${answer}`)
+        .then((res) => {
+          if (res.data.type) {
+            this.answer = res.data.prob;
+          }
+          console.log(res.data);
+          this.aiQuestion = null;
+          this.turn++;
+          this.selectedLabel = "";
+          this.selectedValue = "";
+          this.values = [];
+        });
+    },
+    getImage(id) {
+      return `http://127.0.0.1:5000/images?id=${id}`;
+    },
+  },
+  created() {
+    this.getAllCharacters();
+    this.getLabels();
+  },
+};
 </script>
