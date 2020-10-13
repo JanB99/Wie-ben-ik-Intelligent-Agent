@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    
     <v-main>
       <!-- <HelloWorld/> -->
       <GameScreen/>
@@ -21,5 +22,8 @@ export default {
   data: () => ({
     //
   }),
+  created() {
+    this.$vuetify.theme.light = true;
+  },
 };
 </script>

@@ -1,14 +1,19 @@
 <template>
   <div class="main">
       <v-container>
-          test
+          <Start/>
       </v-container>
   </div>
 </template>
 
 <script>
+import Start from '../components/Start'
+
 export default {
-    name: 'MainGameScreen'
+    name: 'MainGameScreen',
+    components: {
+        Start
+    }
 }
 </script>
 
