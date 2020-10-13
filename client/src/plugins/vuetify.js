@@ -6,16 +6,16 @@ Vue.use(Vuetify);
 export default new Vuetify({
     theme: {
         themes: {
-            dark: {
-                primary: '#a7d9ed',
-                secondary: '#80cbde',
-                accent: '#0f7593',
+            dark: { 
+                primary: '#a7d9ed', 
+                secondary: '#80cbde', 
+                accent: '#0f7593', 
             },
             light: {
-                primary: '#a7d9ed',
-                secondary: '#80cbde',
-                accent: '#0f7593',
+                primary: '#a7d9ed', 
+                secondary: '#80cbde', 
+                accent: '#0f7593', 
             }
-        },
-    },
-})
+        }
+    }
+});
