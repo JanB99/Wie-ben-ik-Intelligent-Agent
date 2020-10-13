@@ -120,14 +120,21 @@ class Node:
         self.true_branch.print(spacing+"  ", True)
         self.false_branch.print(spacing+"  ", False)
     
-    def toJson(self):
-        return {
-            'prob': self.prob,
-            'question': self.question.__repr__(),
-            'true_branch': self.true_branch.toJson(),
-            'false_branch': self.false_branch.toJson(),
-            'rows': self.rows
-        }
+    def toJson(self, compact):
+        if compact: 
+            return {
+                'true_branch': self.true_branch.toJson(compact),
+                'false_branch': self.false_branch.toJson(compact),
+            }
+        else: 
+            return {
+                'prob': self.prob,
+                'question': self.question.__repr__(),
+                'true_branch': self.true_branch.toJson(compact),
+                'false_branch': self.false_branch.toJson(compact),
+                'rows': self.rows
+            }
+
 
 class Leaf:
     def __init__(self, rows):
@@ -139,7 +146,7 @@ class Leaf:
     def print(self, spacing, boolean):
         print(spacing, str(boolean) + "-->", self.probabilities)
     
-    def toJson(self):
+    def toJson(self, compact):
         return {
             'type': 'leaf', 
             'prob': self.probabilities
@@ -177,8 +184,8 @@ class Tree:
         else:
             self.predict(row, node.false_branch)
 
-    def toJson(self):
-        return self.root.toJson() 
+    def toJson(self, compact):
+        return self.root.toJson(compact) 
     
     def getQuestion(self):
         if isinstance(self.root, Node):

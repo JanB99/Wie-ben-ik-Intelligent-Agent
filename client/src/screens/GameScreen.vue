@@ -1,14 +1,19 @@
 <template>
   <div class="main">
       <v-container>
-          test
+          <AI />
       </v-container>
   </div>
 </template>
 
 <script>
+import AI from '../components/AI'
+
 export default {
-    name: 'MainGameScreen'
+    name: 'MainGameScreen',
+    components: {
+        AI
+    }
 }
 </script>
 

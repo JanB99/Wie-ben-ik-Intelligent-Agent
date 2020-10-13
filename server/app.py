@@ -24,7 +24,12 @@ factor = 0.5
 
 @app.route('/tree', methods=['GET'])
 def index():
-    return jsonify(tree.toJson())
+    arg = request.args.get('compact')
+    if arg == '1':
+        return jsonify(tree.toJson(True))
+    else:
+        return jsonify(tree.toJson(False))
+
 
 @app.route('/getAllCharacters', methods=['GET'])
 def characters():

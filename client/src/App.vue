@@ -21,5 +21,8 @@ export default {
   data: () => ({
     //
   }),
+  created() {
+    this.$vuetify.theme.light = true;
+  }
 };
 </script>
