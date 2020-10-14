@@ -123,6 +123,7 @@ class Node:
     def toJson(self, compact):
         if compact: 
             return {
+                'question': self.question.__repr__(),
                 'true_branch': self.true_branch.toJson(compact),
                 'false_branch': self.false_branch.toJson(compact),
             }
