@@ -21,8 +21,8 @@
       </v-layout>
 
       <v-card-actions>
-        <v-btn class="accent">Bevestig karakter</v-btn>
-        <v-btn class="error">Annuleer</v-btn>
+        <v-btn class="accent" @click="() => onConfirm(character)">Bevestig karakter</v-btn>
+        <v-btn class="error" @click="onCancel">Annuleer</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -36,6 +36,8 @@ export default {
   props: {
     character: Array,
     getImage: Function,
+    onCancel: Function,
+    onConfirm: Function,
   },
   data() {
     return {

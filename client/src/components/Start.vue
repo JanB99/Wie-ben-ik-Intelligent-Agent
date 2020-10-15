@@ -42,6 +42,8 @@
       <Modal
         :character="playerCharacter"
         :getImage="getImage"
+        :onCancel="() => isOpen = false"
+        :onConfirm="startGame"
       />
     </v-dialog>
   </div>
@@ -56,11 +58,15 @@ export default {
   components: {
     Modal,
   },
+  props: {
+    onGameStart: Function
+  },
   data() {
     return {
       characters: null,
       playerCharacter: null,
       isOpen: false,
+      ai: null
     };
   },
   methods: {
@@ -76,10 +82,20 @@ export default {
       this.playerCharacter = char;
       this.isOpen = true;
     },
+    startGame(char){
+      console.log(char)
+      let id = char[char.length - 1]
+      this.isOpen = false
+      // this.$emit("onGameStart", id)
+      this.onGameStart(id)
+    },
   },
   created() {
     this.getAllCharacters();
   },
+  mounted(){
+    this.getAllCharacters();
+  }
 };
 </script>
 
