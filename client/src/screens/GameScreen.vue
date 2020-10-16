@@ -1,11 +1,50 @@
 <template>
   <div class="main">
     <v-container>
-      <Start v-if="!player" :onGameStart="onGameStart" />
-      <div v-else>
-        <Player :player="player" :onTurnEnd="turnIncrement" v-if="turn % 2 == 0"/>
-        <AI :onTurnEnd="turnIncrement" v-else/>
-      </div>
+      <Start
+        v-if="!player"
+        :characters="characters"
+        :onGameStart="onGameStart"
+      />
+      <v-card v-else class="ma-2 pa-6 primary elevation-10" outlined rounded>
+        <v-layout row wrap justify-space-around>
+          <v-flex md7>
+            <v-layout row wrap justify-start>
+              <v-flex
+                v-for="(char, index) in characters"
+                :key="index"
+                md1
+                class="ma-2"
+              >
+                <v-img :src="getImage(char[char.length - 1])">
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+                {{ char[char.length - 2] }}
+              </v-flex>
+            </v-layout>
+          </v-flex>
+
+          <v-flex md3>
+            <Player
+              :player="player"
+              :onTurnEnd="turnIncrement"
+              v-if="turn % 2 == 0"
+            />
+            <AI :onTurnEnd="turnIncrement" :player="player" v-else />
+          </v-flex>
+        </v-layout>
+      </v-card>
 
       <v-btn @click="reset">reset</v-btn>
     </v-container>
@@ -15,21 +54,22 @@
 <script>
 import axios from "axios";
 import Start from "../components/Start";
-import AI from '../components/AI'
-import Player from '../components/Player'
+import AI from "../components/AI";
+import Player from "../components/Player";
 
 export default {
   name: "MainGameScreen",
   components: {
     Start,
     AI,
-    Player
+    Player,
   },
   data() {
     return {
       player: null,
       ai: null,
       turn: 0,
+      characters: null,
     };
   },
   methods: {
@@ -39,28 +79,41 @@ export default {
         this.ai = res.data[1];
       });
     },
-    getPlayerCharacter(){
-      axios.get("http://127.0.0.1:5000/character").then(res => {
+    getAllCharacters() {
+      axios.get("http://127.0.0.1:5000/getAllCharacters").then((res) => {
+        this.characters = res.data;
+      });
+    },
+    getImage(id) {
+      return `http://127.0.0.1:5000/images?id=${id}`;
+    },
+    getPlayerCharacter() {
+      axios.get("http://127.0.0.1:5000/character").then((res) => {
         this.player = res.data[0];
         this.ai = res.data[1];
-      })
+      });
     },
-    reset(){
+    reset() {
       this.turn = 0;
-      this.player = null
-      this.ai = null
-      axios.get("http://127.0.0.1:5000/reset").then(res => {
-        console.log(res.data)
-      })
+      this.player = null;
+      this.ai = null;
+      axios.get("http://127.0.0.1:5000/reset").then((res) => {
+        console.log(res.data);
+      });
+      this.getAllCharacters();
     },
-    turnIncrement(){
-      this.turn++
-      console.log(this.turn)
-    }
+    turnIncrement(data) {
+      this.turn++;
+      if (data) {
+        this.characters = data;
+      }
+      console.log(this.characters)
+    },
   },
-  created(){
+  created() {
     this.getPlayerCharacter();
-  }
+    this.getAllCharacters();
+  },
 };
 </script>
 

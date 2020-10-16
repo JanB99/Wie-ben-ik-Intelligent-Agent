@@ -59,11 +59,12 @@ export default {
     Modal,
   },
   props: {
-    onGameStart: Function
+    onGameStart: Function,
+    // characters: Array,
   },
   data() {
     return {
-      characters: null,
+      characters: [],
       playerCharacter: null,
       isOpen: false,
       ai: null
