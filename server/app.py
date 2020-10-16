@@ -9,18 +9,30 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-with open("dataset.csv", 'r', newline='') as file:
-    reader = csv.reader(file)
-    playerDataset = [row for (index, row) in enumerate(reader)]
-    dataset = copy.deepcopy(playerDataset)
-    headers = dataset[0]
-    del dataset[0], playerDataset[0]
+def loadDataset():
+    dataset1, dataset2, headers = [], [], []
+    with open("dataset.csv", 'r', newline='') as file:
+        reader = csv.reader(file)
+        dataset1 = [row for (index, row) in enumerate(reader)]
+        dataset2 = copy.deepcopy(dataset1)
+        headers = dataset2[0]
+        del dataset1[0], dataset2[0]
+    return dataset1, dataset2, headers
 
 tree = None
 playerCharacter = None
 aiCharacter = None
 factor = 0.5
+playerDataset, dataset, headers = loadDataset()
 
+@app.route('/reset', methods=['GET'])
+def reset():
+    global playerDataset, dataset, headers 
+    playerDataset, dataset, headers = loadDataset()
+    playerCharacter = None
+    aiCharacter = None
+    tree = None
+    return 'reset succesful'
 
 @app.route('/tree', methods=['GET'])
 def index():
@@ -40,11 +52,15 @@ def setCharacter():
     global playerCharacter, aiCharacter, tree
 
     arg = request.args.get('num')
-    if arg and int(arg) < len(dataset) and int(arg) >= 0:
-        if playerCharacter == None:
-            playerCharacter = playerDataset.pop(int(arg))
-            aiCharacter = playerDataset[random.randint(0, len(playerDataset)-1)]
-            dataset.pop(playerDataset.index(aiCharacter))
+    if arg:
+        # if playerCharacter == None:
+        index = 0
+        for (i, row) in enumerate(playerDataset):
+            if row[-1] == arg:
+                index = i
+        playerCharacter = playerDataset.pop(index)
+        aiCharacter = playerDataset[random.randint(0, len(playerDataset)-1)]
+        dataset.pop(playerDataset.index(aiCharacter))
         #     # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
 
         #     # aiCharacter = dataset.pop(int(arg))
@@ -60,8 +76,6 @@ def setCharacter():
 
         # playerCharacter = playerDataset[int(arg)]
         # aiCharacter = dataset[int(arg)]
-
-        print(aiCharacter)
         tree = main.Tree(dataset)
     
     return jsonify(playerCharacter, aiCharacter)

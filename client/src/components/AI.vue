@@ -10,6 +10,7 @@
         </v-flex>
         <v-flex md6 class="pa-2">
           <DecisionTree />
+          <v-btn @click="onTurnEnd">test to next turn</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -19,7 +20,7 @@
 <script>
 import Character from "./Character";
 import Question from "./Question";
-import DecisionTree from "./DecisionTree";
+// import DecisionTree from "./DecisionTree";
 
 export default {
   name: "App",
@@ -29,5 +30,8 @@ export default {
     Question,
     DecisionTree,
   },
+  props: {
+    onTurnEnd: Function,
+  }
 };
 </script>
