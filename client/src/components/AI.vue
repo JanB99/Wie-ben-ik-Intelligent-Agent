@@ -1,20 +1,18 @@
 <template>
   <div class="AI">
-    <v-container>
-      <v-card class="primary" elevation="10" outlined rounded>
-        <v-layout row>
-          <v-flex class="d-flex flex-grow-1 flex-shrink-0 align-center justify-center">
-            <Character />
-          </v-flex>
-          <v-flex class="d-flex flex-grow-1 flex-shrink-0 align-center justify-center">
-            <Question />
-          </v-flex>
-          <v-flex class="d-flex flex-grow-1 flex-shrink-0 align-center justify-center">
-            <!-- <DecisionTree /> -->
-            <v-btn @click="onTurnEnd">test to next turn</v-btn>
-          </v-flex>
-        </v-layout>
-      </v-card>
+    <v-container class="ma-2 pa-6 primary elevation-10" rounded outlined>
+      <v-layout row>
+        <v-flex md3 class="d-flex align-center justify-center">
+          <Character />
+        </v-flex>
+        <v-flex md3 class="d-flex align-center justify-center">
+          <Question />
+        </v-flex>
+        <v-flex md6 class="pa-2">
+          <DecisionTree />
+          <v-btn @click="onTurnEnd">test to next turn</v-btn>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
 </template>
@@ -30,7 +28,7 @@ export default {
   components: {
     Character,
     Question,
-    // DecisionTree
+    DecisionTree,
   },
   props: {
     onTurnEnd: Function,
