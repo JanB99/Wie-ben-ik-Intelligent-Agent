@@ -1,106 +1,97 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
-import main
-import csv, random, copy
+from utils import load_dataset, partition
+from tree import Tree
+from question import Question
+import random
 
+#flask config
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-def loadDataset():
-    dataset1, dataset2, headers = [], [], []
-    with open("dataset.csv", 'r', newline='') as file:
-        reader = csv.reader(file)
-        dataset1 = [row for (index, row) in enumerate(reader)]
-        dataset2 = copy.deepcopy(dataset1)
-        headers = dataset2[0]
-        del dataset1[0], dataset2[0]
-    return dataset1, dataset2, headers
-
 tree = None
-playerCharacter = None
-aiCharacter = None
-factor = 0.5
-playerDataset, dataset, headers = loadDataset()
+player_character = None
+ai_character = None
+# factor = 0.5
+playerDataset, dataset, headers = load_dataset()
 
 @app.route('/reset', methods=['GET'])
 def reset():
     global playerDataset, dataset, headers 
-    playerDataset, dataset, headers = loadDataset()
-    playerCharacter = None
-    aiCharacter = None
+    playerDataset, dataset, headers = load_dataset()
+    player_character = None
+    ai_character = None
     tree = None
     return 'reset succesful'
 
 @app.route('/tree', methods=['GET'])
 def index():
     arg = request.args.get('compact')
-    if arg == '1':
-        return jsonify(tree.toJson(True))
+    if tree:     
+        if arg == '1':
+            return jsonify(tree.toJson(True))
+        else:
+            return jsonify(tree.toJson(False))
     else:
-        return jsonify(tree.toJson(False))
+        return "No tree initialized"
 
 
 @app.route('/getAllCharacters', methods=['GET'])
-def characters():
+def get_all_characters():
     return jsonify(playerDataset)
 
-@app.route('/character', methods=['GET', 'POST'])
-def setCharacter():
-    global playerCharacter, aiCharacter, tree
+@app.route('/character', methods=['GET'])
+def character():
+    global player_character, ai_character, tree
 
     arg = request.args.get('num')
     if arg:
-        # if playerCharacter == None:
+        # if player_character == None:
         index = 0
         for (i, row) in enumerate(playerDataset):
             if row[-1] == arg:
                 index = i
-        playerCharacter = playerDataset.pop(index)
-        aiCharacter = playerDataset[random.randint(0, len(playerDataset)-1)]
-        dataset.pop(playerDataset.index(aiCharacter))
-        #     # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
-
-        #     # aiCharacter = dataset.pop(int(arg))
-
+        player_character = playerDataset.pop(index)
+        ai_character = playerDataset[random.randint(0, len(playerDataset)-1)]
+        dataset.pop(playerDataset.index(ai_character))
+        tree = Tree(dataset, headers)
+        #     # ai_character = dataset.pop(random.randint(0, len(dataset)-1))
+        #     # ai_character = dataset.pop(int(arg))
         # else:
-            # playerDataset.append(playerCharacter)
-            # playerCharacter = playerDataset.pop(int(arg))
-            
-            # dataset.append(aiCharacter)
-            # aiCharacter = dataset.pop(random.randint(0, len(dataset)-1))
-
-            # aiCharacter = dataset.pop(int(arg))
-
-        # playerCharacter = playerDataset[int(arg)]
-        # aiCharacter = dataset[int(arg)]
-        tree = main.Tree(dataset)
-    
-    return jsonify(playerCharacter, aiCharacter)
+            # playerDataset.append(player_character)
+            # player_character = playerDataset.pop(int(arg))
+            # dataset.append(ai_character)
+            # ai_character = dataset.pop(random.randint(0, len(dataset)-1)
+            # ai_character = dataset.pop(int(arg))
+        # player_character = playerDataset[int(arg)]
+        # ai_character = dataset[int(arg)]
+    return jsonify(player_character, ai_character)
 
 @app.route('/labels', methods=['GET'])
-def getLabels():
+def get_labels():
     return jsonify(headers)
 
 @app.route('/values', methods=['GET', 'POST'])
-def getValues():
+def get_values():
     label = request.args.get('label')
     if 'label' in request.args:
         return jsonify(list({x[headers.index(label)] for x in playerDataset}))
+    else:
+        return "Label not found"
 
 @app.route('/question', methods=['GET'])
-def postQuestion():
+def post_question():
 
     global playerDataset
 
     label = request.args.get('label')
     value = request.args.get('value')
 
-    true_branch, false_branch = main.partition(playerDataset, main.Question(headers.index(label), value))
+    true_branch, false_branch = partition(playerDataset, Question(headers.index(label), value, headers))
     
-    if aiCharacter[headers.index(label)] == value:
+    if ai_character[headers.index(label)] == value:
         playerDataset = true_branch
     else:
         playerDataset = false_branch
@@ -109,23 +100,18 @@ def postQuestion():
 
 
 @app.route('/images', methods=['GET'])
-def getImage():
+def get_image():
     idChar = request.args.get('id')
     return send_file('images/Asset {}.png'.format(idChar), mimetype='image/png', as_attachment=True, cache_timeout=0)
 
-@app.route('/test', methods=['GET'])
-def test():
-    return send_file('images/Asset 10.png', mimetype='image/png')
-
 @app.route('/aiquestion', methods=['GET'])
-def getAiQuestion():
+def get_AI_question():
 
     global tree
     answer = request.args.get('answer')
 
     # guess = tree.guess(factor)
     # if guess:
-
     #     if answer == '0':
     #         tree = main.Tree(tree.root.rows)
     #         guess = tree.guess(factor)

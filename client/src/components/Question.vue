@@ -28,7 +28,7 @@ export default {
   },
 
   created() {
-    this.setCharacter(this.playerIndex);
+    // this.setCharacter(this.playerIndex);
     this.getAiQuestion();
   },
 

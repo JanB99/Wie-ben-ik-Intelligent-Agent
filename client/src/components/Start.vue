@@ -14,7 +14,7 @@
               <v-card
                 :elevation="hover ? 16 : 0"
                 @click="selectCharacter(char)"
-                class="accent"
+                class="secondary"
               >
                 <v-img :src="getImage(char[char.length - 1])">
                   <template v-slot:placeholder>
@@ -84,10 +84,11 @@ export default {
       this.isOpen = true;
     },
     startGame(char){
-      console.log(char)
+      // console.log(char)
       let id = char[char.length - 1]
       this.isOpen = false
       // this.$emit("onGameStart", id)
+      console.log("testtest")
       this.onGameStart(id)
     },
   },

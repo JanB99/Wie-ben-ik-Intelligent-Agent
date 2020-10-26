@@ -7,7 +7,7 @@
         </v-flex> -->
         <!-- <v-flex md3 class="d-flex align-center justify-center"> -->
           <Question />
-          <v-img :src="getImage(player[player.length-1])"></v-img>
+          <!-- <v-img :src="getImage(player[player.length-1])"></v-img> -->
           <v-btn @click="() => onTurnEnd()">test to next turn</v-btn>
         <!-- </v-flex> -->
         <!-- <v-flex md6 class="pa-2">

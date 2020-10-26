@@ -3,9 +3,9 @@
     <v-container>
       <v-card outlined rounded class="elevation-10 accent">
         <v-layout column justify-space-around>
-          <v-flex md6>
+          <!-- <v-flex md6>
             <v-img :src="getImage(player[player.length - 1])"></v-img>
-          </v-flex>
+          </v-flex> -->
 
           <v-flex md6>
             <v-select

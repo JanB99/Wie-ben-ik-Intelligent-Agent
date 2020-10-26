@@ -36,12 +36,23 @@
           </v-flex>
 
           <v-flex md3>
-            <Player
-              :player="player"
-              :onTurnEnd="turnIncrement"
-              v-if="turn % 2 == 0"
-            />
-            <AI :onTurnEnd="turnIncrement" :player="player" v-else />
+            <v-layout column align-center>
+              <v-flex md4>
+                <v-img
+                  :src="getImage(player[player.length - 1])"
+                  contain
+                ></v-img>
+              </v-flex>
+
+              <v-flex md8 style="width: 100%">
+                <Player
+                  :player="player"
+                  :onTurnEnd="turnIncrement"
+                  v-if="turn % 2 == 0"
+                />
+                <AI :onTurnEnd="turnIncrement" :player="player" v-else />
+              </v-flex>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-card>
@@ -67,7 +78,7 @@ export default {
   data() {
     return {
       player: null,
-      ai: null,
+      // ai: null,
       turn: 0,
       characters: null,
     };
@@ -76,7 +87,7 @@ export default {
     onGameStart(id) {
       axios.get(`http://127.0.0.1:5000/character?num=${id}`).then((res) => {
         this.player = res.data[0];
-        this.ai = res.data[1];
+        // this.ai = res.data[1];
       });
     },
     getAllCharacters() {
@@ -89,25 +100,27 @@ export default {
     },
     getPlayerCharacter() {
       axios.get("http://127.0.0.1:5000/character").then((res) => {
+        console.log(res)
         this.player = res.data[0];
-        this.ai = res.data[1];
+        // this.ai = res.data[1];
       });
     },
     reset() {
-      this.turn = 0;
-      this.player = null;
-      this.ai = null;
+      // this.ai = null;
       axios.get("http://127.0.0.1:5000/reset").then((res) => {
+        this.getAllCharacters();
+        this.turn = 0;
+        this.player = null;
         console.log(res.data);
       });
-      this.getAllCharacters();
     },
     turnIncrement(data) {
       this.turn++;
       if (data) {
         this.characters = data;
       }
-      console.log(this.characters)
+      // this.getPlayerCharacter()
+      console.log(this.characters);
     },
   },
   created() {
