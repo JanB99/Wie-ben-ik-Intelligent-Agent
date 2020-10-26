@@ -38,10 +38,28 @@
           <v-flex md3>
             <v-layout column align-center>
               <v-flex md4>
-                <v-img
-                  :src="getImage(player[player.length - 1])"
-                  contain
-                ></v-img>
+                <v-hover v-slot:default="{ hover }">
+                  <v-card
+                    :elevation="hover ? 16 : 0"
+                    @click="() => isOpen = true"
+                    color="accent"
+                  >
+                    <v-img :src="getImage(player[player.length - 1])">
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                  </v-card>
+                </v-hover>
               </v-flex>
 
               <v-flex md8 style="width: 100%">
@@ -59,6 +77,15 @@
 
       <v-btn @click="reset">reset</v-btn>
     </v-container>
+
+    <v-dialog v-model="isOpen" width="unset">
+      <Modal
+        :character="player"
+        :getImage="getImage"
+        :onConfirm="() => isOpen = false"
+        :confirmText="'OK'"
+      />
+    </v-dialog>
   </div>
 </template>
 
@@ -67,6 +94,7 @@ import axios from "axios";
 import Start from "../components/Start";
 import AI from "../components/AI";
 import Player from "../components/Player";
+import Modal from "../components/Modal";
 
 export default {
   name: "MainGameScreen",
@@ -74,6 +102,7 @@ export default {
     Start,
     AI,
     Player,
+    Modal,
   },
   data() {
     return {
@@ -81,6 +110,7 @@ export default {
       // ai: null,
       turn: 0,
       characters: null,
+      isOpen: false, 
     };
   },
   methods: {
@@ -100,7 +130,7 @@ export default {
     },
     getPlayerCharacter() {
       axios.get("http://127.0.0.1:5000/character").then((res) => {
-        console.log(res)
+        console.log(res);
         this.player = res.data[0];
         // this.ai = res.data[1];
       });

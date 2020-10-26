@@ -20,9 +20,9 @@
         </v-flex>
       </v-layout>
 
-      <v-card-actions>
-        <v-btn class="accent" @click="() => onConfirm(character)">Bevestig karakter</v-btn>
-        <v-btn class="error" @click="onCancel">Annuleer</v-btn>
+      <v-card-actions class="justify-center">
+        <v-btn v-if="onConfirm" class="accent" @click="() => onConfirm(character)">{{confirmText}}</v-btn>
+        <v-btn v-if="onCancel" class="error" @click="onCancel">Annuleer</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -38,6 +38,7 @@ export default {
     getImage: Function,
     onCancel: Function,
     onConfirm: Function,
+    confirmText: String
   },
   data() {
     return {

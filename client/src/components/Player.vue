@@ -1,25 +1,39 @@
 <template>
   <div class="player">
     <v-container>
-      <v-card outlined rounded class="elevation-10 accent">
+      <v-card outlined rounded class="elevation-10 secondary">
         <v-layout column justify-space-around>
-          <!-- <v-flex md6>
-            <v-img :src="getImage(player[player.length - 1])"></v-img>
-          </v-flex> -->
-
           <v-flex md6>
             <v-select
+              class="mx-4 mt-3"
               v-model="selectedLabel"
               @change="getValues"
               :items="labels"
+              outlined
+              item-color="accent"
+              label="Feature"
+            ></v-select>
+
+            <v-select
+              v-model="selectedValue"
+              :items="values"
+              class="mx-4"
+              outlined
+              item-color="accent"
+              label="Value"
+              :disabled="!selectedLabel"
             >
             </v-select>
 
-            <v-select v-model="selectedValue" :items="values"> </v-select>
-
-            <v-btn @click="askQuestion" :disabled="selectedValue == ''">
-              Stel vraag
-            </v-btn>
+            <div class="text-center mb-2">
+              <v-btn
+                @click="askQuestion"
+                class="accent"
+                :disabled="selectedValue == ''"
+              >
+                Stel vraag
+              </v-btn>
+            </div>
           </v-flex>
         </v-layout>
       </v-card>
@@ -77,7 +91,6 @@ export default {
           this.characters = res.data;
           this.onTurnEnd(res.data);
         });
-      
     },
   },
   created() {

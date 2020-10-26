@@ -44,6 +44,7 @@
         :getImage="getImage"
         :onCancel="() => isOpen = false"
         :onConfirm="startGame"
+        :confirmText="'Bevestig karakter'"
       />
     </v-dialog>
   </div>
