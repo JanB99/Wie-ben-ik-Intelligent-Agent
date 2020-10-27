@@ -15,8 +15,9 @@ def count_classes(rows, headers):
     for row in rows:
         label = row[headers.index("name")]
         if label not in counts:
-            counts[label] = 0
-        counts[label] += 1
+            charId = row[headers.index("id")]
+            counts[label] = [charId, 0]
+        counts[label][1] += 1
     return counts
 
 def partition(rows, question):

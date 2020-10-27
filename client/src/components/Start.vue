@@ -45,6 +45,7 @@
         :onCancel="() => isOpen = false"
         :onConfirm="startGame"
         :confirmText="'Bevestig karakter'"
+        :headerText="'Je gekozen karakter'"
       />
     </v-dialog>
   </div>
@@ -61,7 +62,6 @@ export default {
   },
   props: {
     onGameStart: Function,
-    // characters: Array,
   },
   data() {
     return {
@@ -85,11 +85,8 @@ export default {
       this.isOpen = true;
     },
     startGame(char){
-      // console.log(char)
       let id = char[char.length - 1]
       this.isOpen = false
-      // this.$emit("onGameStart", id)
-      console.log("testtest")
       this.onGameStart(id)
     },
   },

@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 from utils import load_dataset, partition
-from tree import Tree
+from tree import Tree, Leaf
 from question import Question
-import random
+import random, os
 
 #flask config
 app = Flask(__name__)
@@ -14,7 +14,6 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 tree = None
 player_character = None
 ai_character = None
-# factor = 0.5
 playerDataset, dataset, headers = load_dataset()
 
 @app.route('/reset', methods=['GET'])
@@ -48,7 +47,6 @@ def character():
 
     arg = request.args.get('num')
     if arg:
-        # if player_character == None:
         index = 0
         for (i, row) in enumerate(playerDataset):
             if row[-1] == arg:
@@ -56,17 +54,8 @@ def character():
         player_character = playerDataset.pop(index)
         ai_character = playerDataset[random.randint(0, len(playerDataset)-1)]
         dataset.pop(playerDataset.index(ai_character))
+        #pop ai dataset met index
         tree = Tree(dataset, headers)
-        #     # ai_character = dataset.pop(random.randint(0, len(dataset)-1))
-        #     # ai_character = dataset.pop(int(arg))
-        # else:
-            # playerDataset.append(player_character)
-            # player_character = playerDataset.pop(int(arg))
-            # dataset.append(ai_character)
-            # ai_character = dataset.pop(random.randint(0, len(dataset)-1)
-            # ai_character = dataset.pop(int(arg))
-        # player_character = playerDataset[int(arg)]
-        # ai_character = dataset[int(arg)]
     return jsonify(player_character, ai_character)
 
 @app.route('/labels', methods=['GET'])
@@ -89,15 +78,24 @@ def post_question():
     label = request.args.get('label')
     value = request.args.get('value')
 
-    true_branch, false_branch = partition(playerDataset, Question(headers.index(label), value, headers))
+    question = Question(headers.index(label), value, headers)
+
+    true_branch, false_branch = partition(playerDataset, question)
     
     if ai_character[headers.index(label)] == value:
         playerDataset = true_branch
+        return jsonify({
+            'characters' :playerDataset,
+            'boolean': True,
+            'questionObject': question.toJson()
+            })
     else:
         playerDataset = false_branch
-    
-    return jsonify(playerDataset) 
-
+        return jsonify({
+            'characters' :playerDataset,
+            'boolean': False,
+            'questionObject': question.toJson()
+            })
 
 @app.route('/images', methods=['GET'])
 def get_image():
@@ -110,15 +108,9 @@ def get_AI_question():
     global tree
     answer = request.args.get('answer')
 
-    # guess = tree.guess(factor)
-    # if guess:
-    #     if answer == '0':
-    #         tree = main.Tree(tree.root.rows)
-    #         guess = tree.guess(factor)
-    #         return jsonify(guess)
-    #     elif answer == '1':
-    #         return 'AI WINT :P'
-    # else:
+    if isinstance(tree.root, Leaf):
+        return jsonify(tree.getQuestion())
+
     if answer == '1':
         tree.root = tree.root.true_branch
     elif answer == '0':

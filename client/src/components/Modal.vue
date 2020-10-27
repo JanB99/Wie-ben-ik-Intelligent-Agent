@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <v-card>
-      <v-card-title>Je gekozen karakter</v-card-title>
+      <v-card-title>{{headerText}}</v-card-title>
 
       <v-layout justify-space-around>
         <v-flex md6 class="ma-3">
@@ -38,7 +38,8 @@ export default {
     getImage: Function,
     onCancel: Function,
     onConfirm: Function,
-    confirmText: String
+    confirmText: String,
+    headerText: String,
   },
   data() {
     return {

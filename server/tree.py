@@ -3,6 +3,7 @@ from question import Question
 import math
 import random
 
+
 class Node:
     def __init__(self, question, true_branch, false_branch, prob, rows):
         self.question = question
@@ -15,38 +16,29 @@ class Node:
         print(spacing, ">", self.question)
         self.true_branch.print(spacing+"  ", True)
         self.false_branch.print(spacing+"  ", False)
-    
-    def toJson(self, compact):
-        if compact: 
-            return {
-                'question': self.question.__repr__(),
-                'true_branch': self.true_branch.toJson(compact),
-                'false_branch': self.false_branch.toJson(compact),
-            }
-        else: 
-            return {
-                'prob': self.prob,
-                'question': self.question.__repr__(),
-                'true_branch': self.true_branch.toJson(compact),
-                'false_branch': self.false_branch.toJson(compact),
-                'rows': self.rows
-            }
+
+    def toJson(self):
+
+        return {
+            'prob': self.prob,
+            'question': self.question.__repr__(),
+            'true_branch': self.true_branch.toJson(compact),
+            'false_branch': self.false_branch.toJson(compact),
+            'rows': self.rows
+        }
 
 
 class Leaf:
     def __init__(self, rows, headers):
-        self.predictions = count_classes(rows, headers)
-        total_counts = sum(self.predictions.values())
-        self.probabilities = {
-            key: value / total_counts for (key, value) in self.predictions.items()}
+        self.predictions = rows
 
     def print(self, spacing, boolean):
-        print(spacing, str(boolean) + "-->", self.probabilities)
-    
-    def toJson(self, compact):
+        print(spacing, str(boolean) + "-->", self.predictions)
+
+    def toJson(self):
         return {
-            'type': 'leaf', 
-            'prob': self.probabilities
+            'type': 'leaf',
+            'prob': self.predictions
         }
 
 
@@ -54,7 +46,6 @@ class Tree:
     def __init__(self, rows, headers):
         self.headers = headers
         self.root = self.create_tree(rows)
-        
 
     def create_tree(self, rows):
 
@@ -73,7 +64,7 @@ class Tree:
         best_gain = 0
         current = self.gini(rows)
 
-        num_features = len(rows[0])-2
+        num_features = len(rows[0])-1
 
         for col in range(num_features):
 
@@ -92,12 +83,9 @@ class Tree:
                     best_gain = info_gain
                     best_question = question
 
-        # print(best_gain, best_question)
-        return best_gain, best_question 
-    
+        return best_gain, best_question
+
     def information_gain_entropy(self, left, right):
-        # de mate aan chaos/onzekerheid meten. normaal gesproken word deze gemeten met de log ipv de gini
-        # gini is ook een methode om disorder te meten
         p = len(left) / (len(left) + len(right))
         if p == 0:
             return - (1-p) * math.log2(1-p)
@@ -114,7 +102,7 @@ class Tree:
         counts = count_classes(rows, self.headers)
         impurity = 1
         for label in counts:
-            prob = counts[label] / float(len(rows))
+            prob = counts[label][1] / float(len(rows))
             impurity -= prob**2
         return impurity
 
@@ -122,9 +110,9 @@ class Tree:
         self.root.print("", "")
         print("\n")
 
-    def toJson(self, compact):
-        return self.root.toJson(compact) 
-    
+    def toJson(self):
+        return self.root.toJson(compact)
+
     def getQuestion(self):
         if isinstance(self.root, Node):
             return self.root.question.toJson()
