@@ -14,7 +14,7 @@
               <v-card
                 :elevation="hover ? 16 : 0"
                 @click="selectCharacter(char)"
-                class="accent"
+                class="secondary"
               >
                 <v-img :src="getImage(char[char.length - 1])">
                   <template v-slot:placeholder>
@@ -44,6 +44,8 @@
         :getImage="getImage"
         :onCancel="() => isOpen = false"
         :onConfirm="startGame"
+        :confirmText="'Bevestig karakter'"
+        :headerText="'Je gekozen karakter'"
       />
     </v-dialog>
   </div>
@@ -60,7 +62,6 @@ export default {
   },
   props: {
     onGameStart: Function,
-    // characters: Array,
   },
   data() {
     return {
@@ -84,10 +85,8 @@ export default {
       this.isOpen = true;
     },
     startGame(char){
-      console.log(char)
       let id = char[char.length - 1]
       this.isOpen = false
-      // this.$emit("onGameStart", id)
       this.onGameStart(id)
     },
   },

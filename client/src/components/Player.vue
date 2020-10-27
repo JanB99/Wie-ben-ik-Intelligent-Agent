@@ -1,29 +1,41 @@
 <template>
   <div class="player">
-    <v-container>
-      <v-card outlined rounded class="elevation-10 accent">
-        <v-layout column justify-space-around>
-          <v-flex md6>
-            <v-img :src="getImage(player[player.length - 1])"></v-img>
-          </v-flex>
+    <v-card outlined rounded class="ma-2 pa-6 elevation-10 secondary">
+      <v-layout column justify-space-around>
+        <v-flex md6>
+          <v-select
+            class="mx-4 mt-3"
+            v-model="selectedLabel"
+            @change="getValues"
+            :items="labels"
+            outlined
+            item-color="accent"
+            label="Feature"
+          ></v-select>
 
-          <v-flex md6>
-            <v-select
-              v-model="selectedLabel"
-              @change="getValues"
-              :items="labels"
+          <v-select
+            v-model="selectedValue"
+            :items="values"
+            class="mx-4"
+            outlined
+            item-color="accent"
+            label="Value"
+            :disabled="!selectedLabel"
+          >
+          </v-select>
+
+          <div class="text-center mb-2">
+            <v-btn
+              @click="askQuestion"
+              class="accent"
+              :disabled="selectedValue == ''"
             >
-            </v-select>
-
-            <v-select v-model="selectedValue" :items="values"> </v-select>
-
-            <v-btn @click="askQuestion" :disabled="selectedValue == ''">
               Stel vraag
             </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-card>
-    </v-container>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-card>
   </div>
 </template>
 
@@ -45,11 +57,6 @@ export default {
     onTurnEnd: Function,
   },
   methods: {
-    // getAllCharacters() {
-    //   axios.get("http://127.0.0.1:5000/getAllCharacters").then((res) => {
-    //     this.characters = res.data;
-    //   });
-    // },
     getImage(id) {
       return `http://127.0.0.1:5000/images?id=${id}`;
     },
@@ -74,10 +81,8 @@ export default {
           `http://127.0.0.1:5000/question?label=${this.selectedLabel}&value=${this.selectedValue}`
         )
         .then((res) => {
-          this.characters = res.data;
           this.onTurnEnd(res.data);
         });
-      
     },
   },
   created() {
