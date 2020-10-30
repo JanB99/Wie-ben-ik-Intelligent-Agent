@@ -1,4 +1,4 @@
-![zuydLogo](/Images/ZuydLogo.png)
+![Onderzoek](/markdown/Onderzoeksrapport.md)
 # what-to-do-with-git
 Dag Allen,
 
