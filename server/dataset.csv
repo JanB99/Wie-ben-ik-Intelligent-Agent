@@ -1,25 +1,25 @@
-hair_color,hair,eye_color,facial_hair,gender,has_glasses,has_earrings,has_hat,is_balding,name,id
-black,short,brown,mustache,male,no,no,no,no,Alex,1
-orange,long,blue,mustache,male,no,no,no,no,Alfred,2
-blonde,long,blue,none,female,no,no,no,no,Anita,3
-black,short,brown,none,female,no,yes,no,no,Anne,4
-brown,short,brown,none,male,no,no,yes,no,Bernard,5
-orange,very short,brown,goatee,male,no,no,no,yes,Bill,6
-blonde,short,brown,mustache,male,no,no,no,no,Charles,7
-orange,short,brown,none,female,yes,no,yes,no,Claire,8
-blonde,short,brown,goatee,male,no,no,no,no,David,9
-blonde,short,brown,none,male,no,no,yes,no,Eric,10
-orange,short,brown,none,male,no,no,no,no,Frans,11
-white,short,brown,none,male,no,no,yes,no,George,12
-orange,very short,brown,none,male,no,no,no,yes,Herman,13
-blonde,short,brown,none,male,yes,no,no,no,Joe,14
-brown,long,brown,none,female,no,yes,yes,no,Maria,15
-black,short,brown,mustache,male,no,no,no,no,Max,16
-white,short,brown,none,male,yes,no,no,no,Paul,17
-white,short,blue,none,male,no,no,no,no,Peter,18
-black,short,brown,beard,male,no,no,no,no,Philip,19
-brown,very short,brown,beard,male,no,no,no,yes,Richard,20
-brown,short,blue,none,male,no,no,no,no,Robert,21
-white,very short,brown,none,male,yes,no,no,yes,Sam,22
-white,long,brown,none,female,no,no,no,no,Susan,23
-black,very short,blue,none,male,yes,no,no,yes,Tom,24
+hair_color,has_facial_hair,has_glasses,has_hat,gender,eye_color,mouth,has_accessories,name,id
+brown,yes,no,no,male,brown,open,yes,james,1
+black,yes,no,no,male,blue,closed,no,eduard,2
+balding,yes,yes,no,male,brown,closed,yes,jacob,3
+black,no,yes,no,female,brown,closed,yes,sharona,4
+brown,no,no,yes,male,brown,closed,yes,maikel,5
+black,yes,no,no,male,brown,closed,no,roderick,6
+brown,no,no,no,male,blue,open,no,stefan,7
+brown,yes,yes,no,male,brown,open,yes,donny,8
+brown,no,no,no,male,brown,closed,no,jeroen,9
+brown,no,no,no,male,brown,open,no,ross,10
+ginger,no,no,no,male,brown,closed,no,luc,11
+blonde,no,no,no,female,blue,closed,no,erika,12
+brown,no,yes,no,male,blue,closed,yes,victor,13
+brown,yes,yes,no,male,brown,closed,yes,gaston,14
+black,yes,yes,no,male,blue,closed,yes,michel,15
+balding,yes,no,no,male,blue,closed,no,robert,16
+brown,yes,no,yes,male,brown,closed,yes,ronald,17
+brown,no,yes,no,male,blue,open,yes,maarten,18
+brown,yes,no,no,male,brown,closed,no,jan,19
+brown,yes,no,no,male,brown,open,no,kevin,20
+brown,no,no,no,female,blue,open,no,josje,21
+balding,yes,no,yes,male,blue,closed,yes,karel,22
+blonde,no,no,no,female,blue,closed,yes,anita,23
+blonde,no,no,no,female,brown,closed,no,susan,24

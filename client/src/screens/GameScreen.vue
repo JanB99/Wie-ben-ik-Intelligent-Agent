@@ -14,7 +14,7 @@
                 v-for="(char, index) in characters"
                 :key="index"
                 md1
-                class="ma-2"
+                class="ma-5"
               >
                 <v-img :src="getImage(char[char.length - 1])">
                   <template v-slot:placeholder>
