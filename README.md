@@ -1,3 +1,4 @@
+![zuydLogo](/Images/ZuydLogo.png)
 # what-to-do-with-git
 Dag Allen,
 
