@@ -1,5 +1,9 @@
 <template>
   <div class="main">
+    <v-app-bar color="accent">
+      <v-btn depressed class="mx-5 accent" @click="reset">restart</v-btn>
+      <v-btn depressed class="mx-5 accent" @click="() => openSim = true">simulate</v-btn>
+    </v-app-bar>
     <v-container>
       <Start
         v-if="!player"
@@ -85,10 +89,6 @@
           </v-flex>
         </v-layout>
       </v-card>
-
-      <v-btn class="ma-2 pa-6 accent elevation-10" @click="reset"
-        >restart</v-btn
-      >
     </v-container>
 
     <v-dialog v-model="isOpen" width="unset">
@@ -121,6 +121,10 @@
       />
     </v-dialog>
 
+    <v-dialog v-model="openSim" width="unset" persistent>
+      <Simulation :onCancel="() => openSim = false"/>
+    </v-dialog>
+
     <v-bottom-sheet v-model="isSheetOpen" hide-overlay>
       <v-sheet
         class="text-center accent d-flex align-center justify-center"
@@ -138,6 +142,7 @@ import Start from "../components/Start";
 import AI from "../components/AI";
 import Player from "../components/Player";
 import Modal from "../components/Modal";
+import Simulation from "../components/SimulationModal";
 
 import Vue from "vue";
 import VueConfetti from "vue-confetti";
@@ -151,6 +156,7 @@ export default {
     AI,
     Player,
     Modal,
+    Simulation
   },
   data() {
     return {
@@ -160,6 +166,7 @@ export default {
       isOpen: false,
       isAIWin: false,
       isPlayerWin: false,
+      openSim: false,
       aiAnswer: null,
       playerAnswer: null,
       isSheetOpen: false,
@@ -212,7 +219,7 @@ export default {
         }.</h1>`;
       }
 
-      if (this.characters.length == 1) {
+      if (data && data.boolean && this.characters.length == 1) {
         this.isPlayerWin = true;
         this.playerAnswer = this.characters[0];
         this.$confetti.start(this.getConfigs());

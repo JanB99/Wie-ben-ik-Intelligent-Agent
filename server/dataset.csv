@@ -1,7 +1,7 @@
-hair_color,has_facial_hair,has_glasses,has_hat,gender,eye_color,mouth,has_accessories,name,id
+hair color,facial hair,glasses,hat,gender,eye color,mouth,accessories,name,id
 brown,yes,no,no,male,brown,open,yes,james,1
 black,yes,no,no,male,blue,closed,no,eduard,2
-balding,yes,yes,no,male,brown,closed,yes,jacob,3
+n / a,yes,yes,no,male,brown,closed,yes,jacob,3
 black,no,yes,no,female,brown,closed,yes,sharona,4
 brown,no,no,yes,male,brown,closed,yes,maikel,5
 black,yes,no,no,male,brown,closed,no,roderick,6
@@ -14,12 +14,12 @@ blonde,no,no,no,female,blue,closed,no,erika,12
 brown,no,yes,no,male,blue,closed,yes,victor,13
 brown,yes,yes,no,male,brown,closed,yes,gaston,14
 black,yes,yes,no,male,blue,closed,yes,michel,15
-balding,yes,no,no,male,blue,closed,no,robert,16
+n / a,yes,no,no,male,blue,closed,no,robert,16
 brown,yes,no,yes,male,brown,closed,yes,ronald,17
 brown,no,yes,no,male,blue,open,yes,maarten,18
 brown,yes,no,no,male,brown,closed,no,jan,19
 brown,yes,no,no,male,brown,open,no,kevin,20
 brown,no,no,no,female,blue,open,no,josje,21
-balding,yes,no,yes,male,blue,closed,yes,karel,22
+n / a,yes,no,yes,male,blue,closed,yes,karel,22
 blonde,no,no,no,female,blue,closed,yes,anita,23
 blonde,no,no,no,female,brown,closed,no,susan,24

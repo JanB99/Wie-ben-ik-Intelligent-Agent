@@ -1,5 +1,6 @@
 from utils import count_classes, partition
 from question import Question
+from leaf import Leaf
 import math
 import random
 
@@ -22,29 +23,15 @@ class Node:
         return {
             'prob': self.prob,
             'question': self.question.__repr__(),
-            'true_branch': self.true_branch.toJson(compact),
-            'false_branch': self.false_branch.toJson(compact),
+            'true_branch': self.true_branch.toJson(),
+            'false_branch': self.false_branch.toJson(),
             'rows': self.rows
         }
 
-
-class Leaf:
-    def __init__(self, rows, headers):
-        self.predictions = rows
-
-    def print(self, spacing, boolean):
-        print(spacing, str(boolean) + "-->", self.predictions)
-
-    def toJson(self):
-        return {
-            'type': 'leaf',
-            'prob': self.predictions
-        }
-
-
 class Tree:
-    def __init__(self, rows, headers):
+    def __init__(self, rows, headers, strategy="gini"):
         self.headers = headers
+        self.strategy = strategy
         self.root = self.create_tree(rows)
 
     def create_tree(self, rows):
@@ -76,8 +63,10 @@ class Tree:
 
                 true, false = partition(rows, question)
 
-                # info_gain = self.information_gain_gini(current, true, false)
-                info_gain = self.information_gain_entropy(true, false)
+                if self.strategy == "gini":
+                    info_gain = self.information_gain_gini(current, true, false)
+                elif self.strategy == "entropy":
+                    info_gain = self.information_gain_entropy(true, false)
 
                 if info_gain > best_gain:
                     best_gain = info_gain
@@ -96,7 +85,7 @@ class Tree:
 
     def information_gain_gini(self, current, left, right):
         p = len(left) / (len(left) + len(right))
-        return current - p * gini(left) - (1-p) * gini(right)
+        return current - p * self.gini(left) - (1-p) * self.gini(right)
 
     def gini(self, rows):
         counts = count_classes(rows, self.headers)
@@ -111,7 +100,7 @@ class Tree:
         print("\n")
 
     def toJson(self):
-        return self.root.toJson(compact)
+        return self.root.toJson()
 
     def getQuestion(self):
         if isinstance(self.root, Node):

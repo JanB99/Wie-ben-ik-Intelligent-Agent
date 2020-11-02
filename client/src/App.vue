@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    
     <v-main>
-      <!-- <HelloWorld/> -->
       <GameScreen/>
     </v-main>
   </v-app>

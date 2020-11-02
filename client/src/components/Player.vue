@@ -8,6 +8,7 @@
             v-model="selectedLabel"
             @change="getValues"
             :items="labels"
+            color="accent"
             outlined
             item-color="accent"
             label="Feature"
@@ -16,6 +17,7 @@
           <v-select
             v-model="selectedValue"
             :items="values"
+            color="accent"
             class="mx-4"
             outlined
             item-color="accent"

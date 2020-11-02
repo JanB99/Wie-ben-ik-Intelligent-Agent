@@ -61,7 +61,7 @@ export default {
         .then((res) => {
           if (res.data.type) {
             this.answer = res.data.prob;
-            
+            this.onAIWin(this.answer);
           } else {
             this.question = res.data.question;
           }

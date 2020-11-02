@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
-from utils import load_dataset, partition
+from utils import load_dataset, partition, simulate_games
 from tree import Tree, Leaf
 from question import Question
 import random, os
@@ -116,7 +116,20 @@ def get_AI_question():
     elif answer == '0':
         tree.root = tree.root.false_branch
 
-    
     return jsonify(tree.getQuestion())
+
+
+@app.route('/simulate', methods=['GET'])
+def simulate_AI():
+
+    num_games = int(request.args.get('games'))
+    ai1_strat = request.args.get('strat1')
+    ai2_strat = request.args.get('strat2')
+    
+    results = simulate_games(num_games, Tree, ai1_strat, ai2_strat)
+
+    return jsonify(results)
+
+
 
 app.run()
