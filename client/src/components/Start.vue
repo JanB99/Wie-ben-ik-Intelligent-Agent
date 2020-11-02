@@ -14,7 +14,7 @@
               <v-card
                 :elevation="hover ? 16 : 0"
                 @click="selectCharacter(char)"
-                class="secondary"
+                class="secondary text-center"
               >
                 <v-img :src="getImage(char[char.length - 1])">
                   <template v-slot:placeholder>
@@ -30,7 +30,7 @@
                     </v-row>
                   </template>
                 </v-img>
-                {{ char[char.length - 2] }}
+                {{ char[char.length - 2] | capitalize}}
               </v-card>
             </v-hover>
           </v-flex>
@@ -89,6 +89,11 @@ export default {
       this.isOpen = false
       this.onGameStart(id)
     },
+  },
+  filters: {
+    capitalize(value){
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
   },
   created() {
     this.getAllCharacters();

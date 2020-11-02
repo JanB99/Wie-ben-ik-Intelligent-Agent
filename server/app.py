@@ -11,11 +11,13 @@ app.config["DEBUG"] = True
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 CORS(app, resources={r'/*': {'origins': '*'}})
 
+#Variables
 tree = None
 player_character = None
 ai_character = None
 playerDataset, dataset, headers = load_dataset()
 
+#API calls
 @app.route('/reset', methods=['GET'])
 def reset():
     global playerDataset, dataset, headers 
@@ -52,9 +54,10 @@ def character():
             if row[-1] == arg:
                 index = i
         player_character = playerDataset.pop(index)
-        ai_character = playerDataset[random.randint(0, len(playerDataset)-1)]
-        dataset.pop(playerDataset.index(ai_character))
-        #pop ai dataset met index
+        rand_index = random.randint(0, len(playerDataset)-1)
+        ai_character = playerDataset[rand_index]
+        del dataset[rand_index]
+        
         tree = Tree(dataset, headers)
     return jsonify(player_character, ai_character)
 
@@ -129,7 +132,5 @@ def simulate_AI():
     results = simulate_games(num_games, Tree, ai1_strat, ai2_strat)
 
     return jsonify(results)
-
-
 
 app.run()

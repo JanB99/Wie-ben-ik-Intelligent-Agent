@@ -54,17 +54,16 @@ def simulate_games(n, Tree, strategy_ai1, strategy_ai2):
     for i in range(n):
         ai1_dataset, ai2_dataset, headers = load_dataset()
 
-        r1 = random.randint(0, len(ai1_dataset)-1)
-        ai1 = ai1_dataset.pop(r1)
-        r2 = random.randint(0, len(ai1_dataset)-1)
-        ai2 = ai1_dataset[r2]
-        del ai2_dataset[r2]
+        rand_index1 = random.randint(0, len(ai1_dataset)-1)
+        ai1 = ai1_dataset.pop(rand_index1)
+        rand_index2 = random.randint(0, len(ai1_dataset)-1)
+        ai2 = ai1_dataset[rand_index2]
+        del ai2_dataset[rand_index2]
 
         ai1_tree = Tree(ai1_dataset, headers, strategy=strategy_ai1)
         ai2_tree = Tree(ai2_dataset, headers, strategy=strategy_ai2)
 
         character, turns, winner = sim(ai1_tree.root, ai1, ai2_tree.root, ai2, random.randint(0, 1))
-
         results[winner]["total wins"] += 1
         results["average turns"] += turns
     
@@ -77,7 +76,6 @@ def simulate_games(n, Tree, strategy_ai1, strategy_ai2):
 def sim(ai1_root, ai1, ai2_root, ai2, turn):
 
     if turn % 2 == 0:
-
         if isinstance(ai1_root, Leaf):
             return ai1_root.predictions, turn, "AI 1"
 
@@ -86,7 +84,6 @@ def sim(ai1_root, ai1, ai2_root, ai2, turn):
         else:
             result = sim(ai1_root.false_branch, ai1, ai2_root, ai2, turn + 1)
     else:
-
         if isinstance(ai2_root, Leaf):
             return ai2_root.predictions, turn, "AI 2"
 
@@ -97,50 +94,10 @@ def sim(ai1_root, ai1, ai2_root, ai2, turn):
 
     return result
 
-# with open("dataset.csv", 'r', newline='') as file:
-#     reader = csv.reader(file)
-#     dataset = [row for (index, row) in enumerate(reader)]
-#     headers = dataset[0][0:-1]
-#     del dataset[0]
-
-# headers = ["haircolor", "job", "gender", "age", "label"]
-#
-# dataset = [
-#     ["black", "musician", "male", 50, "Micheal Jackson"],
-#     ["grey", "scientist", "male", 76, "Albert Einstein"],
-#     ["n/a", "comedian", "male", 53, "Joe Rogan"],
-#     ["blonde", "musician", "female", 43, "Shakira"],
-#     ["blonde", "musician", "female", 50, "Gwen Stefani"],
-#     ["black", "coder", "male", 21, "Jan Baljan"],
-#     ["black", "fighter", "male", 35, "Nate Diaz"],
-#     ["black", "fighter", "male", 35, "Jorge Masvidal"],
-#     ["grey", "comedian", "male", 60, "Joey Diaz"],
-#     ["black", "scientist", "male", 36, "Lex Fridman"],
-#     ["black", "musician", "female", 39, "Beyonce"],
-#     ["brown", "musician", "female", 18, "Billie Eilish"],
-#     ["blonde", "bodybuilder", "male", 23, "Stan Deckers"],
-# ]
-#
-# headers = ["color", "diameter", "label"]
-#
-# dataset = [
-#     ['Green', 3, 'Apple'],
-#     ['Yellow', 3, 'Apple'],
-#     ['Red', 1, 'Grape'],
-#     ['Yellow', 3, 'Lemon'],
-# ]
-
-# tree = Tree(dataset)
-
-# tree.print_tree()
-
-# tree.predict(test[0], tree.root)
-
-
 def ask(root):
 
     if isinstance(root, Leaf):
-        print("\n", root.probabilities)
+        print("\n", root.predictions)
         return
 
     print(root.question)
@@ -151,5 +108,3 @@ def ask(root):
         ask(root.true_branch)
     else:
         ask(root.false_branch)
-
-# ask(tree.root)

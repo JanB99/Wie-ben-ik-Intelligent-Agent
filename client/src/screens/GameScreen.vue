@@ -1,9 +1,14 @@
 <template>
   <div class="main">
     <v-app-bar color="accent">
+      <div class="blue lighten-4 rounded ma-2 elevation-5" >
+        <v-img src="../assets/Data_Intelligence_Logo.png" class="ma-1" width="200"></v-img>
+      </div>
+
       <v-btn depressed class="mx-5 accent" @click="reset">restart</v-btn>
-      <v-btn depressed class="mx-5 accent" @click="() => openSim = true">simulate</v-btn>
+      <v-btn depressed class="mx-5 accent" @click="() => (openSim = true)">simulate</v-btn>
     </v-app-bar>
+
     <v-container>
       <Start
         v-if="!player"
@@ -122,7 +127,7 @@
     </v-dialog>
 
     <v-dialog v-model="openSim" width="unset" persistent>
-      <Simulation :onCancel="() => openSim = false"/>
+      <Simulation :onCancel="() => (openSim = false)" />
     </v-dialog>
 
     <v-bottom-sheet v-model="isSheetOpen" hide-overlay>
@@ -156,7 +161,7 @@ export default {
     AI,
     Player,
     Modal,
-    Simulation
+    Simulation,
   },
   data() {
     return {

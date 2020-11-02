@@ -29,7 +29,7 @@ class Node:
         }
 
 class Tree:
-    def __init__(self, rows, headers, strategy="gini"):
+    def __init__(self, rows, headers, strategy="entropy"):
         self.headers = headers
         self.strategy = strategy
         self.root = self.create_tree(rows)
@@ -68,7 +68,7 @@ class Tree:
                 elif self.strategy == "entropy":
                     info_gain = self.information_gain_entropy(true, false)
 
-                if info_gain > best_gain:
+                if info_gain >= best_gain:
                     best_gain = info_gain
                     best_question = question
 
@@ -107,12 +107,3 @@ class Tree:
             return self.root.question.toJson()
         else:
             return self.root.toJson()
-
-    # def guess(self, threshold):
-    #     if isinstance(self.root, Node) and self.root.prob >= threshold:
-    #         guess = random.choice(self.root.rows)
-    #         nameIndex = headers.index('name')
-    #         self.root.rows.remove(guess)
-    #         return Question(nameIndex, guess[nameIndex]).toJson()
-    #     else:
-    #         return None
