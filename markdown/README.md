@@ -1,4 +1,5 @@
 ﻿# Wie ben ik AI?
+Zuyd Logo(/Images/ZuydLogo.png)
 ## ZUYD LOGO
 
 
