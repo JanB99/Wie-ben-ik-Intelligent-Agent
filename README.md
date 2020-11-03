@@ -332,10 +332,10 @@ Om de architectuur zo concreet en gedetailleerd mogelijk te beschrijven is het z
 ### 2.2.1 Kern theorie
 
 Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) als bladeren (leafs). De boom kan zoals een echte boom getraceerd worden vanaf de wortel tot aan een blad. Dit wordt het doorlopen van de boom genoemd. Normaliter kan een boom op een bepaald punt meerdere vertakkingen hebben. Dit is in de theorie mogelijk, echter wordt er bij beslissingsbomen over het algemeen gewerkt met een binaire boomstructuur. Dit is een structuur die een ingraad van precies 1 heeft en een uitgraad van hoogstens 2. In het kader van de casus wordt een vraag gesteld bij iedere vertakking (node). Dit is een “waar” of “niet waar” vraag, waardoor een binaire boom meer doeltreffend is, omdat er telkens antwoord kan worden gegeven uit twee keuzes (waar, niet waar). Wanneer wordt gesproken over de complexiteit van het zoeken in een binaire zoekboom dan kan deze worden geformuleerd op basis van het beste mogelijke scenario en het slechtst mogelijke scenario, waarbij de complexiteit een O(n) en een O(log n) respectievelijk bedraagt. Hierbij is in het geval van het beste scenario de beslissingsboom volledig gebalanceerd, en in het geval van het slechtste scenario de boom helemaal niet gebalanceerd is (Cormen, Leiserson, Rivest, & Stein, 2009).
-## FIGUUR 1 BINAIRE BOOM
 
-![Figuur1]("/Images/Ontwerp/Figuur1.png")
 
+![Figuur1](/Images/Ontwerp/Figuur1.png)
+*FIGUUR 1 BINAIRE BOOM*
 ### 2.2.2 Vraag object
 
 De boom wordt gebouwd aan de hand van mogelijke vragen die gesteld kunnen worden op basis van de dataset. Hierbij worden de features getransformeerd naar vragen. Iedere vraag omvat een waarde, die correspondeert met een bepaalde feature, en een referentie naar de verzamelnaam van de desbetreffende feature.
@@ -344,7 +344,8 @@ Door middel van deze constructie kan een vraag worden opgesteld. Bijvoorbeeld: i
 
 Op deze manier van vragen formuleren kan er een duidelijke scheiding worden gemaakt binnen de dataset op basis van een vraag.
 
-## FIGUUR 2 Question Object Class
+![Figuur2](/Images/Ontwerp/Figuur2.png)
+*FIGUUR 2 Question Object Class*
 
 
 ### 2.2.3 Blad object
@@ -353,7 +354,9 @@ Aan het uiteinde van iedere tak in de boomstructuur wordt het resultaat gerepres
 
 In het geval dat bepaalde rijen precies dezelfde features hebben, maar geen gelijke labels hebben, dan bestaat het resultaat uit meerdere geclassificeerde objecten. Dit is in de praktijk een ongewenst resultaat, want dan is er geen eenduidige classificatie. Echter is dit wel reden om aan de bel te trekken, want dit resultaat betekent dat er niet voldoende onderscheid is binnen de dataset. Aldus de dataset zal specifieker moeten worden ontleed in de vorm van verschillende features.
 
-## FIGUUR 3 Node Object Class
+
+![Figuur3](/Images/Ontwerp/Figuur3.png)
+*FIGUUR 3 Node Object Class*
 
 
 
@@ -429,11 +432,14 @@ Om de best mogelijke vraag te vinden voor een set aan rijen moet de informatie w
 Deze functie vind op basis van een bepaalde dataset de best mogelijke vraag om de dataset zo gebalanceerd mogelijk te scheiden, waarbij de vraag die de hoeveelheid vergaarde informatie genereerd wordt gemaximaliseerd.
 ### 2.2.5 Model diagram
 
-## Figuur 4 Model weergave Besslissingsboom
+
+![Figuur4](/Images/Ontwerp/Figuur4.png)
+*Figuur 4 Model weergave Besslissingsboom*
 
 Door middel van het beschreven algoritme in 2.2.1, 2.2.2, 2.2.3 en 2.2.4 wordt de dataset opgesplitst en verkleind. Wanneer dit proces op een recursieve manier wordt uitgevoerd ontstaat een boomstructuur die bij iedere takpunt een vraagobject bevat en bij ieder blad een bladobject bevat. Wanneer de boom is gebouwd kan deze worden doorlopen van boven naar beneden, waarbij telkens een vraag gesteld wordt over het te classificeren object.
 
-## Figuur 5 Class Diagram
+![Figuur5](/Images/Ontwerp/Figuur5.png)
+*Figuur 5 Class Diagram*
 
 In het bovenstaande class diagram is de structuur weergeven van de backend van het “Wie ben ik?" Spel. Deze begint bij een class genaamd Tree die een root bevat van het object type Node. Deze Node bevat op zichzelf weer een question van het type Quesion en een true-, false branch. Deze true- en false branches zijn op zich weer node’s / leafs. De question bevat een column namelijk de index. Daarnaast bevat de leaf class een prediction die aangeeft welke waarde er voorspeld wordt.
 
@@ -467,7 +473,8 @@ De backend zal worden opgedeeld in meerdere modules naar aanleiding van function
 
 De functionaliteit rondom de Flask server zal gescheiden worden van de functionaliteit van de Artificial intelligence. Binnen de AI-functionaliteit zal het Question object ook gescheiden worden, omdat deze niet alleen in de beslissingsboom wordt gebruikt, maar ook tijdens het stellen van een vraag door de gebruiker. De input van de gebruiker wordt namelijk omgezet in de vorm van een vraagobject die de juiste interface bevat om correct te functioneren met de beslissingsboom. Ten slotte worden ook enkele functies apart gezet die dienen als utilisatie functies en over het geheel gebruikt zullen worden.
 
-## FIguur 6 Opdeling van de functionaliteit in modules
+![Figuur6](/Images/Ontwerp/Figuur6.png)
+*Figuur 6 Opdeling van de functionaliteit in modules*
 
 
 ### 3.1.2 API calls
@@ -503,7 +510,8 @@ Binnen de casus groep is gekozen voor vue vanwege het gebruiksgemak van de vueti
 
 In het onderstaand component diagram is weergeven hoe de structuur van het “Wie ben ik?” spel weergeven. Hierin is een splitsing gemaakt tussen frontend en backend. In de backend worden de acties verwerkt en data geretourneerd. Deze staat in koppeling met de frontend met behulp van drie interfaces. Deze uiten zich in de vorm van API’s in de code. In het frontend gedeelte zijn deze drie componenten aanwezig. Het Character toont en haalt alle characters op in de frontend met behulp van het IProcesCharacter interface, het question component haalt en verwerkt de vragen met behulp van IProcesQuestion en het laatste component, de DecisionTree, is met behulp van het IProcesDecisionTree interface opgesteld om de decision tree te achter halen en te verkrijgen.
 
-## Figuur 7 Component Diagram
+![Figuur7](/Images/Ontwerp/Figuur7.png)
+*Figuur 7 Component Diagram*
 
 <a name="Verwijzigingen"></a>
 # Verwijzingen
