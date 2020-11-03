@@ -231,7 +231,10 @@ Hier ligt de nadruk op het in theorie, aangezien het doeleinde van het ‘wie be
 ## Inhoud
 1. [Aanpak](#OntwerpDocument/Aanpak) 
 2. [Architectuur](#OntwerpDocument/Achitectuur) 
-3. [Infrastructuur](#OntwerpDocument/Infrastructuur) 
+3. [Infrastructuur](#OntwerpDocument/Infrastructuur)
+3. [Infrastructuur Back End](#OntwerpDocument/Backend)
+3. [Infrastructuur Front End](#OntwerpDocument/Frontend)
+
 
 <a name="OntwerpDocument/Aanpak"></a>
 ## 1. Aanpak
