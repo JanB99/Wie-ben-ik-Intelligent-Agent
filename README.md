@@ -92,7 +92,7 @@ Shannen Dols & Jim Bemelen
 
 3. ### [Ontwerp Document](#OntwerpDocument)
 
-4. ### [Handleiding]()
+4. ### [Handleiding](#Handleiding)
 
 5. ### [Verwijzigingen](#Verwijzigingen)
 
@@ -335,7 +335,7 @@ Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) 
 
 
 ![Figuur1](/lfs/Ontwerp/Figuur1.png)
-*FIGUUR 1 BINAIRE BOOM*
+*Figuur 1 BINAIRE BOOM*
 ### 2.2.2 Vraag object
 
 De boom wordt gebouwd aan de hand van mogelijke vragen die gesteld kunnen worden op basis van de dataset. Hierbij worden de features getransformeerd naar vragen. Iedere vraag omvat een waarde, die correspondeert met een bepaalde feature, en een referentie naar de verzamelnaam van de desbetreffende feature.
@@ -345,7 +345,7 @@ Door middel van deze constructie kan een vraag worden opgesteld. Bijvoorbeeld: i
 Op deze manier van vragen formuleren kan er een duidelijke scheiding worden gemaakt binnen de dataset op basis van een vraag.
 
 ![Figuur2](/lfs/Ontwerp/Figuur2.png)
-*FIGUUR 2 Question Object Class*
+*Figuur 2 Question Object Class*
 
 
 ### 2.2.3 Blad object
@@ -356,7 +356,7 @@ In het geval dat bepaalde rijen precies dezelfde features hebben, maar geen geli
 
 
 ![Figuur3](/lfs/Ontwerp/Figuur3.png)
-*FIGUUR 3 Node Object Class*
+*Figuur 3 Node Object Class*
 
 
 
@@ -512,6 +512,9 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 
 ![Figuur7](/lfs/Ontwerp/Figuur7.png)
 *Figuur 7 Component Diagram*
+
+<a name="Handleiding"></a>
+# Handleiding
 
 <a name="Verwijzigingen"></a>
 # Verwijzingen
