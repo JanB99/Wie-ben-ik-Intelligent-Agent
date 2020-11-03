@@ -44,7 +44,7 @@ Shannen Dols & Jim Bemelen
 >|------|------|---------|
 >| 0.1 | 13-9 | Opzet eerste structuur
 ## Inhoud
-1. ### [Inleiding](#PlanVanAanpak/Inleding)
+1. ### [Inleiding](#PlanVanAanpak/Inleiding)
 2. ### [Opdrachtomschrijving](#PlanVanAanpak/Opdrachtomschrijving)
 3. ### [Op te leveren producten](#PlanVanAanpak/Producten)
 4. ### [Project aanpak en fasering](#PlanVanAanpak/Projectaanpak)
@@ -302,19 +302,19 @@ Op basis van het vraag object is het mogelijk om een boomstructuur in elkaar te 
 Om te bepalen wat de mate aan informatie is bij iedere vertakking moet eerst de kwaliteit van een split in de dataset worden gemeten. Een mogelijke en vaak gehanteerde methode is de Gini Index bepalen van een vertakking. Hierbij wordt de mate aan onzuiverheid bepaald van een set aan rijen. Dit geeft een indicatie van de onzekerheid op een bepaald punt aan de hand van een set aan rijen. Wanneer de onzuiverheid gelijk is aan 0, dan is de set optimaal zuiver. Dit betekent bovendien dat er geen twijfels mogelijk zijn over de inhoud van de rijen, sinds er geen variatie is in de rijen. Hierbij is het doel natuurlijk om de Gini score zo dicht mogelijk bij de 0 te krijgen.
 
 
-'''python
-Algorithm gini(rows):
 
-	Counts = countClasses(rows)
+	Algorithm gini(rows):
 
-	Impurity = 1
+		Counts = countClasses(rows)
 
-	For label in counts:
+		Impurity = 1
 
-		Impurity -= (label/size(rows))^2
+		For label in counts:
 
-	Return impurity
-'''
+			Impurity -= (label/size(rows))^2
+
+		Return impurity
+
 
 Deze pseudocode beschrijft het algoritme om de gini index te berekenen. Hierbij wordt met de parameter _rows,_ de rijen aan data bedoeld die na iedere scheiding verkleind wordt door een bepaalde factor. De maat aan onzuiverheid wordt geretourneerd aan het einde van de functie.
 
@@ -322,44 +322,44 @@ Deze pseudocode beschrijft het algoritme om de gini index te berekenen. Hierbij 
 
 Op basis van de Gini Index kan de onzekerheid van een vertakking worden berekend. Hierbij is de volgende stap om de informatie winst te bepalen, door de proportie van het aantal elementen in beide takken te vermenigvuldigen met de Gini Index van beide takken.
 
-'''python
-Algorithm informationGain (currentGini, true_branch, false_branch):
 
-	P = size(true_branch) / (size(true_branch) + size(false_branch))
+	Algorithm informationGain (currentGini, true_branch, false_branch):
 
-	Return currentGini – p * gini(true_branch) - (1 – p) * gini(false_branch)
-'''
+		P = size(true_branch) / (size(true_branch) + size(false_branch))
+
+		Return currentGini – p * gini(true_branch) - (1 – p) * gini(false_branch)
+
 De parameters van deze functie zijn de huidige gini index waarde voor de desbetreffende dataset en de vertakkingen van de huidige dataset in zowel true als false branches. De variant op de information gain formule wordt geretourneerd aan het einde van de functie.
 
 **Best mogelijke vraag vinden**
 
 Om de best mogelijke vraag te vinden voor een set aan rijen moet de informatie winst worden gemaximaliseerd. Dat wil zeggen dat er voor iedere mogelijke vraag uit de verkregen set aan data, iedere mogelijke vraag moet worden gesteld. Deze vraag resulteert in een specifieke deling van de data in twee branches. Vervolgens wordt de informatie winst bepaald van iedere mogelijke vertakking. De vertakking van de hoogst mogelijke informatie winst op basis van de dataset zal worden gehanteerd als de definitieve deling van de dataset.
 
-'''python
-Algorithm findBestQuestion(dataset):
 
-	bestGain = 0_
+	Algorithm findBestQuestion(dataset):
 
-	bestQuestion = null
+		bestGain = 0_
 
-	For column in columns:
+		bestQuestion = null
 
-		For unique values in column:
+		For column in columns:
 
-			question = new Question(column, value)
+			For unique values in column:
 
-			true_rows, false_rows = partition(dataset, question)
+				question = new Question(column, value)
 
-			Gain = informationGain(gini(dataset), true_rows, false_rows)
+				true_rows, false_rows = partition(dataset, question)
 
-			If gain > bestGain:
+				Gain = informationGain(gini(dataset), true_rows, false_rows)
 
-				bestGain = gain
+				If gain > bestGain:
 
-				bestQuestion = question
+					bestGain = gain
 
-	return bestGain, bestQuestion
-'''
+					bestQuestion = question
+
+		return bestGain, bestQuestion
+
 
 
 Deze functie vind op basis van een bepaalde dataset de best mogelijke vraag om de dataset zo gebalanceerd mogelijk te scheiden, waarbij de vraag die de hoeveelheid vergaarde informatie genereerd wordt gemaximaliseerd.
@@ -378,7 +378,6 @@ In het bovenstaande class diagram is de structuur weergeven van de backend van h
 
 De beslissingsboom brengt een aantal voor- en nadelen met zich mee, die moeten worden afgewogen om deze ontwerpkeuze te doorgronden. Deze zullen in tabel formaat worden opgesomd (Goddard, 2016).
 
-<![endif]-->
 
 | **Pros** | **Cons** |
 |------|------|
