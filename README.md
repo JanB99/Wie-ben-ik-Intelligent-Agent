@@ -333,6 +333,7 @@ Om de architectuur zo concreet en gedetailleerd mogelijk te beschrijven is het z
 
 Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) als bladeren (leafs). De boom kan zoals een echte boom getraceerd worden vanaf de wortel tot aan een blad. Dit wordt het doorlopen van de boom genoemd. Normaliter kan een boom op een bepaald punt meerdere vertakkingen hebben. Dit is in de theorie mogelijk, echter wordt er bij beslissingsbomen over het algemeen gewerkt met een binaire boomstructuur. Dit is een structuur die een ingraad van precies 1 heeft en een uitgraad van hoogstens 2. In het kader van de casus wordt een vraag gesteld bij iedere vertakking (node). Dit is een “waar” of “niet waar” vraag, waardoor een binaire boom meer doeltreffend is, omdat er telkens antwoord kan worden gegeven uit twee keuzes (waar, niet waar). Wanneer wordt gesproken over de complexiteit van het zoeken in een binaire zoekboom dan kan deze worden geformuleerd op basis van het beste mogelijke scenario en het slechtst mogelijke scenario, waarbij de complexiteit een O(n) en een O(log n) respectievelijk bedraagt. Hierbij is in het geval van het beste scenario de beslissingsboom volledig gebalanceerd, en in het geval van het slechtste scenario de boom helemaal niet gebalanceerd is (Cormen, Leiserson, Rivest, & Stein, 2009).
 ## FIGUUR 1 BINAIRE BOOM
+
 ![Figuur1]("/Images/Ontwerp/Figuur1.png")
 
 ### 2.2.2 Vraag object
