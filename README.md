@@ -58,8 +58,8 @@ Het is mogelijk voor studenten om gratis een GitHub Pro account aan te vragen (d
 Git kan niet goed om gaan met files die niet bestaan uit plaintext, zoals PNG's, JPG's of PDF's. Om dit probleem te verhelpen kan Git Large File System worden gebruikt.
 
 # Wie ben ik AI?
-[](/Images/ZuydLogo.png)
-## ZUYD LOGO
+![Zuyd Logo](/Images/ZuydLogo.png)
+
 
 
 **Namen**:
