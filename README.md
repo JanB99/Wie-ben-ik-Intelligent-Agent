@@ -483,11 +483,11 @@ Tijdens het werken met Flask is gebruik gemaakt van de lokale development server
 
 
 
-| **Nr.** | **Naam** | **API-call**|**Beschrijving** |
-|----|-----|----|----|----|
- **1**|getAllCharacters|GET|De karakterset van alle karakters wordt verkregen in JSON formaat.
-| **2**|/character|GET|Zonder parameters retourneert deze call het huidige karakter van de speler. Wanneer de parameter “num” wordt meegegeven in de header met een bepaalde waarde, dan wordt het karakter dat correspondeert met die waarde gezet als het spelerskarakter. Deze call kiest ook een willekeurig karakter voor de AI en initialiseert de beslissingsboom.(vb: http://127.0.0.1:5000/character?num=3).
-|**3**|/labels|GET|Retourneert iedere label/header aan de hand van de dataset.|
+| **Nr.** | **Naam** | **API-call** | **Beschrijving** |
+|-----|-----|-----|-----|-----|
+| **1**|getAllCharacters | GET | De karakterset van alle karakters wordt verkregen in JSON formaat.
+| **2** | /character | GET | Zonder parameters retourneert deze call het huidige karakter van de speler. Wanneer de parameter “num” wordt meegegeven in de header met een bepaalde waarde, dan wordt het karakter dat correspondeert met die waarde gezet als het spelerskarakter. Deze call kiest ook een willekeurig karakter voor de AI en initialiseert de beslissingsboom.(vb: http://127.0.0.1:5000/character?num=3). |
+| **3** | /labels | GET | Retourneert iedere label/header aan de hand van de dataset. | 
 |**4**|/values?label={LABEL}|GET|Retourneert iedere unieke value aan de hand van een label. Hierbij is de parameter, “label”, die overeen moet komen met een label uit de set van labels/headers.|
 |**5**|/question?label={LABEL}&value={VALUE}|POST|Aan de hand van parameters “label” en “value”, wordt een vraag geformuleerd waarbij het resultaat een scheiding is van de spelersdataset. Hierbij wordt de gefilterde dataset geretourneerd.|
 |**6**|/aiquestion?answer={ANSWER}|GET|Retourneert de huidige vraag in de beslissingsboom. De parameter “answer” kan worden meegegeven om de volgende vraag te verkrijgen. Hierbij is de waarde van “answer” of 0 (false) of 1 (true).|
