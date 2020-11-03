@@ -58,7 +58,7 @@ Het is mogelijk voor studenten om gratis een GitHub Pro account aan te vragen (d
 Git kan niet goed om gaan met files die niet bestaan uit plaintext, zoals PNG's, JPG's of PDF's. Om dit probleem te verhelpen kan Git Large File System worden gebruikt.
 
 # Wie ben ik AI?
-![Zuyd Logo](/Images/ZuydLogo.png)
+![Zuyd Logo](/lfs/ZuydLogo.png)
 
 
 
@@ -334,7 +334,7 @@ Om de architectuur zo concreet en gedetailleerd mogelijk te beschrijven is het z
 Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) als bladeren (leafs). De boom kan zoals een echte boom getraceerd worden vanaf de wortel tot aan een blad. Dit wordt het doorlopen van de boom genoemd. Normaliter kan een boom op een bepaald punt meerdere vertakkingen hebben. Dit is in de theorie mogelijk, echter wordt er bij beslissingsbomen over het algemeen gewerkt met een binaire boomstructuur. Dit is een structuur die een ingraad van precies 1 heeft en een uitgraad van hoogstens 2. In het kader van de casus wordt een vraag gesteld bij iedere vertakking (node). Dit is een “waar” of “niet waar” vraag, waardoor een binaire boom meer doeltreffend is, omdat er telkens antwoord kan worden gegeven uit twee keuzes (waar, niet waar). Wanneer wordt gesproken over de complexiteit van het zoeken in een binaire zoekboom dan kan deze worden geformuleerd op basis van het beste mogelijke scenario en het slechtst mogelijke scenario, waarbij de complexiteit een O(n) en een O(log n) respectievelijk bedraagt. Hierbij is in het geval van het beste scenario de beslissingsboom volledig gebalanceerd, en in het geval van het slechtste scenario de boom helemaal niet gebalanceerd is (Cormen, Leiserson, Rivest, & Stein, 2009).
 
 
-![Figuur1](/Images/Ontwerp/Figuur1.png)
+![Figuur1](/lfs/Ontwerp/Figuur1.png)
 *FIGUUR 1 BINAIRE BOOM*
 ### 2.2.2 Vraag object
 
@@ -344,7 +344,7 @@ Door middel van deze constructie kan een vraag worden opgesteld. Bijvoorbeeld: i
 
 Op deze manier van vragen formuleren kan er een duidelijke scheiding worden gemaakt binnen de dataset op basis van een vraag.
 
-![Figuur2](/Images/Ontwerp/Figuur2.png)
+![Figuur2](/lfs/Ontwerp/Figuur2.png)
 *FIGUUR 2 Question Object Class*
 
 
@@ -355,7 +355,7 @@ Aan het uiteinde van iedere tak in de boomstructuur wordt het resultaat gerepres
 In het geval dat bepaalde rijen precies dezelfde features hebben, maar geen gelijke labels hebben, dan bestaat het resultaat uit meerdere geclassificeerde objecten. Dit is in de praktijk een ongewenst resultaat, want dan is er geen eenduidige classificatie. Echter is dit wel reden om aan de bel te trekken, want dit resultaat betekent dat er niet voldoende onderscheid is binnen de dataset. Aldus de dataset zal specifieker moeten worden ontleed in de vorm van verschillende features.
 
 
-![Figuur3](/Images/Ontwerp/Figuur3.png)
+![Figuur3](/lfs/Ontwerp/Figuur3.png)
 *FIGUUR 3 Node Object Class*
 
 
@@ -433,12 +433,12 @@ Deze functie vind op basis van een bepaalde dataset de best mogelijke vraag om d
 ### 2.2.5 Model diagram
 
 
-![Figuur4](/Images/Ontwerp/Figuur4.png)
+![Figuur4](/lfs/Ontwerp/Figuur4.png)
 *Figuur 4 Model weergave Besslissingsboom*
 
 Door middel van het beschreven algoritme in 2.2.1, 2.2.2, 2.2.3 en 2.2.4 wordt de dataset opgesplitst en verkleind. Wanneer dit proces op een recursieve manier wordt uitgevoerd ontstaat een boomstructuur die bij iedere takpunt een vraagobject bevat en bij ieder blad een bladobject bevat. Wanneer de boom is gebouwd kan deze worden doorlopen van boven naar beneden, waarbij telkens een vraag gesteld wordt over het te classificeren object.
 
-![Figuur5](/Images/Ontwerp/Figuur5.png)
+![Figuur5](/lfs/Ontwerp/Figuur5.png)
 *Figuur 5 Class Diagram*
 
 In het bovenstaande class diagram is de structuur weergeven van de backend van het “Wie ben ik?" Spel. Deze begint bij een class genaamd Tree die een root bevat van het object type Node. Deze Node bevat op zichzelf weer een question van het type Quesion en een true-, false branch. Deze true- en false branches zijn op zich weer node’s / leafs. De question bevat een column namelijk de index. Daarnaast bevat de leaf class een prediction die aangeeft welke waarde er voorspeld wordt.
@@ -473,7 +473,7 @@ De backend zal worden opgedeeld in meerdere modules naar aanleiding van function
 
 De functionaliteit rondom de Flask server zal gescheiden worden van de functionaliteit van de Artificial intelligence. Binnen de AI-functionaliteit zal het Question object ook gescheiden worden, omdat deze niet alleen in de beslissingsboom wordt gebruikt, maar ook tijdens het stellen van een vraag door de gebruiker. De input van de gebruiker wordt namelijk omgezet in de vorm van een vraagobject die de juiste interface bevat om correct te functioneren met de beslissingsboom. Ten slotte worden ook enkele functies apart gezet die dienen als utilisatie functies en over het geheel gebruikt zullen worden.
 
-![Figuur6](/Images/Ontwerp/Figuur6.png)
+![Figuur6](/lfs/Ontwerp/Figuur6.png)
 *Figuur 6 Opdeling van de functionaliteit in modules*
 
 
@@ -510,7 +510,7 @@ Binnen de casus groep is gekozen voor vue vanwege het gebruiksgemak van de vueti
 
 In het onderstaand component diagram is weergeven hoe de structuur van het “Wie ben ik?” spel weergeven. Hierin is een splitsing gemaakt tussen frontend en backend. In de backend worden de acties verwerkt en data geretourneerd. Deze staat in koppeling met de frontend met behulp van drie interfaces. Deze uiten zich in de vorm van API’s in de code. In het frontend gedeelte zijn deze drie componenten aanwezig. Het Character toont en haalt alle characters op in de frontend met behulp van het IProcesCharacter interface, het question component haalt en verwerkt de vragen met behulp van IProcesQuestion en het laatste component, de DecisionTree, is met behulp van het IProcesDecisionTree interface opgesteld om de decision tree te achter halen en te verkrijgen.
 
-![Figuur7](/Images/Ontwerp/Figuur7.png)
+![Figuur7](/lfs/Ontwerp/Figuur7.png)
 *Figuur 7 Component Diagram*
 
 <a name="Verwijzigingen"></a>
