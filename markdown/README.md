@@ -1,5 +1,5 @@
 ﻿# Wie ben ik AI?
-Zuyd Logo(/Images/ZuydLogo.png)
+[](/Images/ZuydLogo.png)
 ## ZUYD LOGO
 
 
