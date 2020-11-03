@@ -1,4 +1,5 @@
 ﻿# Wie ben ik AI?
+[](/Images/ZuydLogo.png)
 ## ZUYD LOGO
 
 
