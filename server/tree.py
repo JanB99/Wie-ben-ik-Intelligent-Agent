@@ -28,8 +28,9 @@ class Node:
             'rows': self.rows
         }
 
+
 class Tree:
-    def __init__(self, rows, headers, strategy="entropy"):
+    def __init__(self, rows, headers, strategy="entropy2"):
         self.headers = headers
         self.strategy = strategy
         self.root = self.create_tree(rows)
@@ -65,8 +66,10 @@ class Tree:
 
                 if self.strategy == "gini":
                     info_gain = self.information_gain_gini(current, true, false)
-                elif self.strategy == "entropy":
-                    info_gain = self.information_gain_entropy(true, false)
+                elif self.strategy == "entropy2":
+                    info_gain = self.information_gain_entropy2(true, false)
+                elif self.strategy == "entropy10":
+                    info_gain = self.information_gain_entropy10(true, false)
 
                 if info_gain >= best_gain:
                     best_gain = info_gain
@@ -74,7 +77,7 @@ class Tree:
 
         return best_gain, best_question
 
-    def information_gain_entropy(self, left, right):
+    def information_gain_entropy2(self, left, right):
         p = len(left) / (len(left) + len(right))
         if p == 0:
             return - (1-p) * math.log2(1-p)
@@ -82,6 +85,15 @@ class Tree:
             return - p * math.log2(p)
         else:
             return - p * math.log2(p) - (1-p) * math.log2(1-p)
+
+    def information_gain_entropy10(self, left, right):
+        p = len(left) / (len(left) + len(right))
+        if p == 0:
+            return - (1-p) * math.log10(1-p)
+        elif (1-p) == 0:
+            return - p * math.log10(p)
+        else:
+            return - p * math.log10(p) - (1-p) * math.log10(1-p)
 
     def information_gain_gini(self, current, left, right):
         p = len(left) / (len(left) + len(right))

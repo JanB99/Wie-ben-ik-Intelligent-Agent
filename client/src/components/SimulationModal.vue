@@ -11,7 +11,7 @@
       <v-select
         class="mx-16 mt-3"
         v-model="strategyAI1"
-        :items="['gini', 'entropy']"
+        :items="['gini', 'entropy2', 'entropy10']"
         outlined
         color="accent"
         item-color="accent"
@@ -20,7 +20,7 @@
 
       <v-select
         v-model="strategyAI2"
-        :items="['gini', 'entropy']"
+        :items="['gini', 'entropy2', 'entropy10']"
         class="mx-16"
         outlined
         color="accent"
@@ -133,6 +133,7 @@ export default {
       this.strategyAI1 = "";
       this.strategyAI2 = "";
       this.result = null;
+      this.isLoading = false;
       this.onCancel();
     },
   },
