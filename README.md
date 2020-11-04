@@ -42,6 +42,14 @@ Shannen Dolls & Jim Bemelen
 <a name="Handleiding"></a>
 # Handleiding
 
+## frameworks
+front-end: Vue
+- Vuetify, UI 
+- Axios, API calls
+
+backend: Flask
+- Flask cors, Cross origin requests
+
 ## Startup
 Om het programma op te starten zal eerst de back end opgestart moeten worden. daarna zal de Front End opgestart worden.
 
@@ -122,7 +130,11 @@ Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als
 - Werken met .git versiebeheer
 - GitHub repository van Zuyd gebruiken
 
-#### Scope
+### Scope
+In het kader van de scope van dit
+project moet er tenminste voldaan worden aan een user-interface die de menselijke speler in staat stelt om
+te interacteren met zowel het spel als de intelligent agent. Daarnaast moet de intelligent agent gerealiseerd
+worden op modulaire manier, waarbij de opsplitsing van de modules van belang is.
 
 ### Hulpmiddelen van Zuyd
 Vanuit Zuyd wordt de Github omgeving gefaciliteerd en ondersteuning aangeboden aan de studenten bij het (aan)maken van de Docker Files.
