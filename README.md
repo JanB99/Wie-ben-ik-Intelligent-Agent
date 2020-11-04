@@ -37,18 +37,7 @@ Shannen Dols & Jim Bemelen
 
 5. ### [Verwijzigingen](#Verwijzigingen)
 
-<a name="PlanVanAanpak"></a>
-# Plan van Aanpak
 
->### Versiebeheer
->| Versie | Datum | Wijziging/toevoeging |
->|------|------|---------|
->| 0.1 | 13-9 | Opzet eerste structuur
-## Inhoud
-1. ### [Inleiding](#PlanVanAanpak/Inleiding)
-2. ### [Opdrachtomschrijving](#PlanVanAanpak/Opdrachtomschrijving)
-3. ### [Op te leveren producten](#PlanVanAanpak/Producten)
-4. ### [Project aanpak en fasering](#PlanVanAanpak/Projectaanpak)
 
 <a name="Handleiding"></a>
 # Handleiding
@@ -78,6 +67,20 @@ Nu de Back End is opgestart kunnen we de Front End opstarten. Dit doen we door h
 	cd client
 
 	npm run serve
+
+<a name="PlanVanAanpak"></a>
+# Plan van Aanpak
+
+>### Versiebeheer
+>| Versie | Datum | Wijziging/toevoeging |
+>|------|------|---------|
+>| 0.1 | 13-9 | Opzet eerste structuur
+
+## Inhoud
+1. ### [Inleiding](#PlanVanAanpak/Inleiding)
+2. ### [Opdrachtomschrijving](#PlanVanAanpak/Opdrachtomschrijving)
+3. ### [Op te leveren producten](#PlanVanAanpak/Producten)
+4. ### [Project aanpak en fasering](#PlanVanAanpak/Projectaanpak)
 
 <a name="PlanVanAanpak/Inleiding"></a>
 ## 1. Inleiding
