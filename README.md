@@ -35,7 +35,7 @@ Shannen Dolls & Jim Bemelen
 
 4. ### [Ontwerp Document](#Kop4)
 
-5. ### [Ontwerp Document](#Kop5)
+5. ### [Resultaten](#Kop5)
 
 6. ### [Verwijzigingen](#Kop6)
 
