@@ -516,6 +516,32 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 <a name="Handleiding"></a>
 # Handleiding
 
+## Startup
+Om het programma op te starten zal eerst de back end opgestart moeten worden. daarna zal de Front End opgestart worden.
+
+### Back End
+De Back End wordt als volgt Opgestart:
+
+Open de terminal en type het volgende in deze volgorde:
+
+	cd server
+
+	Python3.8 –m venv env
+
+	Env/scripts/activate
+
+	Pip install Flask Flask-Cors
+
+	python app.py
+
+### Front End
+
+Nu de Back End is opgestart kunnen we de Front End opstarten. Dit doen we door het volgende in een tweede terminal window in deze volgorde te typen:
+
+	cd client
+
+	npm run serve
+
 <a name="Verwijzigingen"></a>
 # Verwijzingen
 
