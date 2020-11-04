@@ -35,7 +35,9 @@ Shannen Dolls & Jim Bemelen
 
 4. ### [Ontwerp Document](#Kop4)
 
-5. ### [Verwijzigingen](#Kop5)
+5. ### [Ontwerp Document](#Kop5)
+
+6. ### [Verwijzigingen](#Kop6)
 
 
 
@@ -119,7 +121,7 @@ Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als
 	- Installatie handleiding met onder andere:
 		- Globale stappenplan installatie
 		- Gebruikte libraries en frameworks
-	- Test data indien nodig
+	- Resultaten
 - Source code in GitHub omgeving:
 	- Heldere structuur en naamgeving van code en bestanden
 
@@ -507,9 +509,10 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 ![Figuur7](/lfs/Ontwerp/Figuur7.png)
 *Figuur 7 Component Diagram*
 
-
-
 <a name="Kop5"></a>
+# Resultaten
+
+<a name="Kop6"></a>
 # Verwijzingen
 
 ### Onderzoeksrapport
