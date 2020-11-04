@@ -521,7 +521,7 @@ ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren dr
 van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen.
 In het kader van figuur 3.4 is te zien dat agent 2 vele malen beter presteert dan agent 1.
 
-![](/lfs/Resultaat/simulate.png)
+![Simulatie screenshot](/lfs/Resultaat/simulate.PNG)
 *Figuur 1 Simulatie 2 AI's*
 
 <a name="Kop6"></a>
