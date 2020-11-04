@@ -27,19 +27,19 @@ Shannen Dolls & Jim Bemelen
 
 
 # Inhoud
-1. ### [Handleiding](#Handleiding)
+1. ### [Handleiding](#Kop1)
 
-2. ### [Plan van Aanpak](#PlanVanAanpak)
+2. ### [Plan van Aanpak](#Kop2)
 
-3. ### [Onderzoeksrapport](#OnderzoeksRapport)
+3. ### [Onderzoeksrapport](#Kop3)
 
-4. ### [Ontwerp Document](#OntwerpDocument)
+4. ### [Ontwerp Document](#Kop4)
 
-5. ### [Verwijzigingen](#Verwijzigingen)
+5. ### [Verwijzigingen](#Kop5)
 
 
 
-<a name="Handleiding"></a>
+<a name="Kop1"></a>
 # Handleiding
 
 ## frameworks
@@ -76,7 +76,7 @@ Nu de Back End is opgestart kunnen we de Front End opstarten. Dit doen we door h
 
 	npm run serve
 
-<a name="PlanVanAanpak"></a>
+<a name="Kop2"></a>
 # Plan van Aanpak
 
 >### Versiebeheer
@@ -112,7 +112,7 @@ Daarbij is het van belang dat duidelijk wordt aangetoond met behulp van de produ
 Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als een demonstrator. Ontwerp het systeem op een modulaire manier, werk met interfaces en kies het juiste abstractieniveau werk met interfaces en kies het juiste abstractieniveau. Werk met .git en documenteer het systeem goed zodat het overdraagbaar is.
 
 ### shortlist aan te leveren producten
-- Docker file
+- Dockerfile
 - Overdrachtsdocument in Markdown:
 	- Minimale requirements:
 	- Ontwerp van software
@@ -159,7 +159,7 @@ Binnen het project wordt een aangepaste variant gehanteerd om het project te beg
 
 
 
-<a name="Onderzoek"> </a>
+<a name="Kop3"> </a>
 # Onderzoeksrapport
 
 >### Versiebeheer
@@ -265,7 +265,7 @@ Hier ligt de nadruk op het in theorie, aangezien het doeleinde van het ‘wie be
 
 
 
-<a name="OntwerpDocument"></a>
+<a name="Kop4"></a>
 # Ontwerpdocument
 
 ## Inhoud
@@ -495,7 +495,7 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 
 
 
-<a name="Verwijzigingen"></a>
+<a name="Kop5"></a>
 # Verwijzingen
 
 ### Onderzoeksrapport
