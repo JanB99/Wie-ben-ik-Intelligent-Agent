@@ -512,6 +512,15 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 <a name="Kop5"></a>
 # Resultaten
 
+Aan de hand van de onderliggende architectuur is het mogelijk gemaakt dat er een tweetal instanties van
+de intelligent agent zijn gegenereerd die beide in staat zijn om op adequate wijze het "Wie ben ik?" spel te
+spelen. Figuur 3.4 toont de configureerbaarheid van de agents, waarbij agent 1 gebruik maakt van de gini
+index, terwijl agent 2 gebruik maakt van de information entropy. Het resultaat voor 100 games geeft een win
+ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren draagt bij aan de testbaarheid
+van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen.
+In het kader van figuur 3.4 is te zien dat agent 2 vele malen beter presteert dan agent 1.
+
+
 <a name="Kop6"></a>
 # Verwijzingen
 
