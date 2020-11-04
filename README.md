@@ -233,7 +233,8 @@ Winnowing is een techniek uit machine learning voor het leren van linear classif
 
 ### Alternatieven
 #### KNN methode
-> # KNN EXAMPLE FOTO HIER
+![KNN picture](/lfs/Onderzoek/Figuur1.png)
+*Figuur 1 KNN methode*
 
 Het **KNN**, K-nearest neighbors algorithm, berust zich op het opstellen van een model aan de hand van data, op basis van het model wordt een verwachting gegeven op basis van de verkregen K waarde oftewel beter gezegd de criteria. Een voorbeeld van een model is hier links te zien (Figuur 1 - KNN example). Enkele voor- en nadelen voor het toepassen van het KNN-algoritme is:
 
@@ -520,6 +521,8 @@ ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren dr
 van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen.
 In het kader van figuur 3.4 is te zien dat agent 2 vele malen beter presteert dan agent 1.
 
+![](/lfs/Resultaat/simulate.png)
+*Figuur 1 Simulatie 2 AI's*
 
 <a name="Kop6"></a>
 # Verwijzingen
