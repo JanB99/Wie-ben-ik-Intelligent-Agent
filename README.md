@@ -522,7 +522,7 @@ Figuur 1 toont de configureerbaarheid van de agents, waarbij agent 1 gebruik maa
 
 Uit nieuwsgierigheid zijn aanpassingen gemaakt aan de entropy functie, omdat deze functie voorheen alleen gebruikmaakte van de log2. Echter was het niet duidelijk of een aanpassing van het grondtal van de log het resultaat zou beïnvloeden. Vandaar dat er een kopie van de entropy functie is gemaakt die gebruik maakt van de log10 functie. Het resultaat van agents die gebruik maken van entropy log2 en entropy log10 is te zien in figuur 2. Hieruit, en na meerdere tests, volgt dat er weinig verschil te zien is in de win ratio van beide agents. 
 
-![Simulatie screenshot](/lfs/Resultaat/simulate2.PNG)
+![Simulatie screenshot](/lfs/Resultaat/simulate2.png)
 *Figuur 2 Simulatie 1000 games van agent1 (log2 entropy) en agent2 (log10 entropy)*
 
 Uit (Hershy, 2019) blijkt dat de informatie onzuiverheid niet hetzelfde is bij beide methodieken. De gini index heeft een maximale onzuiverheid van 0.5 terwijl de information entropy een maximale onzuiverheid van 1 heeft. Hoewel beide methodieken een zuiverheid van 0 hebben.
