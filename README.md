@@ -315,7 +315,7 @@ Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) 
 
 
 ![Figuur1](/lfs/Ontwerp/Figuur1.png)
-*Figuur 1 BINAIRE BOOM*
+*Figuur 1 Binaire boom*
 ### 2.2.2 Vraag object
 
 De boom wordt gebouwd aan de hand van mogelijke vragen die gesteld kunnen worden op basis van de dataset. Hierbij worden de features getransformeerd naar vragen. Iedere vraag omvat een waarde, die correspondeert met een bepaalde feature, en een referentie naar de verzamelnaam van de desbetreffende feature.
@@ -375,6 +375,7 @@ Op basis van de Gini Index kan de onzekerheid van een vertakking worden berekend
 		P = size(true_branch) / (size(true_branch) + size(false_branch))
 
 		Return currentGini – p * gini(true_branch) - (1 – p) * gini(false_branch)
+
 
 De parameters van deze functie zijn de huidige gini index waarde voor de desbetreffende dataset en de vertakkingen van de huidige dataset in zowel true als false branches. De variant op de information gain formule wordt geretourneerd aan het einde van de functie.
 
