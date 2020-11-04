@@ -399,7 +399,7 @@ Om de best mogelijke vraag te vinden voor een set aan rijen moet de informatie w
 
 	Algorithm findBestQuestion(dataset):
 
-		bestGain = 0_
+		bestGain = 0
 
 		bestQuestion = null
 
@@ -479,7 +479,7 @@ Tijdens het werken met Flask is gebruik gemaakt van de lokale development server
 
 | **Nr.** | **Naam** | **API-call** | **Beschrijving** |
 |-----|-----|-----|-----|
-| **1**|getAllCharacters | GET | De karakterset van alle karakters wordt verkregen in JSON formaat.
+| **1**| /getAllCharacters | GET | De karakterset van alle karakters wordt verkregen in JSON formaat.
 | **2** | /character | GET | Zonder parameters retourneert deze call het huidige karakter van de speler. Wanneer de parameter “num” wordt meegegeven in de header met een bepaalde waarde, dan wordt het karakter dat correspondeert met die waarde gezet als het spelerskarakter. Deze call kiest ook een willekeurig karakter voor de AI en initialiseert de beslissingsboom.(vb: http://127.0.0.1:5000/character?num=3). |
 | **3** | /labels | GET | Retourneert iedere label/header aan de hand van de dataset. | 
 |**4**|/values?label={LABEL}|GET|Retourneert iedere unieke value aan de hand van een label. Hierbij is de parameter, “label”, die overeen moet komen met een label uit de set van labels/headers.|
