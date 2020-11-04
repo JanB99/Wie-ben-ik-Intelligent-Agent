@@ -488,7 +488,7 @@ Tijdens het werken met Flask is gebruik gemaakt van de lokale development server
 |**7**|/tree|GET|Retourneert de gehele beslissingsboom mits deze al is geinitialiseerd.|
 |**8**|/images?id={ID}|GET|Retourneert een PNG-afbeelding van een karakter uit de dataset middels een bepaalde id meegegeven in de parameter “id”.|
 |**9**|/reset|GET|Iedere gebruikte variabele wordt op null gezet en de dataset wordt opnieuw geladen. Retourneert succes bericht wanneer de reset is geslaagd.|
-|**10**|/simulate?games={GAMES} &strat1={STRATEGY1} &strat2={STRATEGY2}|GET|Simuleert aan de hand van een variabel aantal GAMES de hoeveelheid spellen waarbij 2 instanties van de intelligent agent worden gemaakt. Ook kan er worden meegegeven wat de te hanteren strategie is van zowel AI 1 als AI 2, middels STRATEGY1 en STRATEGY2 respectievelijk. Retourneert statistieken van de gespeelde games.|
+|**10**|/simulate?games={GAMES} &strat1={STRATEGY1} &strat2={STRATEGY2}|GET|Simuleert aan de hand van een variabel aantal "games" de hoeveelheid spellen waarbij 2 instanties van de intelligent agent worden gemaakt. Ook kan er worden meegegeven wat de te hanteren strategie is van zowel AI 1 als AI 2, middels "strategy1" en "strategy2" respectievelijk. Retourneert statistieken van de gespeelde games.|
 
 
 <a name="OntwerpDocument/FrontEnd"></a>
