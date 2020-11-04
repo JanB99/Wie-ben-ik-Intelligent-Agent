@@ -1,6 +1,6 @@
-# Wie ben ik AI?
-![Zuyd Logo](/lfs/ZuydLogo.png)
-
+﻿# Wie ben ik AI?
+[](/Images/ZuydLogo.png)
+## ZUYD LOGO
 
 
 **Namen**:
@@ -23,74 +23,34 @@ Artificial Intelligence (BD02)
 
 **Organisatie**:
 
-Shannen Dolls & Jim Bemelen
+Shannen Dols & Jim Bemelen
 
 
 # Inhoud
-1. ### [Handleiding](#Kop1)
+1. ### [Plan van Aanpak](#PlanVanAanpak)
 
-2. ### [Plan van Aanpak](#Kop2)
+2. ### [Onderzoeksrapport](#OnderzoeksRapport)
 
-3. ### [Onderzoeksrapport](#Kop3)
+3. ### [Ontwerp Document](#OntwerpDocument)
 
-4. ### [Ontwerp Document](#Kop4)
+4. ### [Handleiding]()
 
-5. ### [Resultaten](#Kop5)
+5. ### [Verwijzigingen](#Verwijzigingen)
 
-6. ### [Verwijzigingen](#Kop6)
-
-
-
-<a name="Kop1"></a>
-# Handleiding
-
-## frameworks
-front-end: Vue
-- Vuetify, UI 
-- Axios, API calls
-
-backend: Flask
-- Flask cors, Cross origin requests
-
-## Startup
-Om het programma op te starten zal eerst de back end opgestart moeten worden. daarna zal de Front End opgestart worden.
-
-### Back End
-De Back End wordt als volgt Opgestart:
-
-Open de PowerShell in het project en type het volgende in deze volgorde:
-
-	cd server
-
-	Python3.8 –m venv env
-
-	Env/scripts/activate
-
-	Pip install Flask Flask-Cors
-
-	python app.py
-
-### Front End
-
-Nu de Back End is opgestart kunnen we de Front End opstarten. Dit doen we door het volgende in een tweede PowerShell in het project in deze volgorde te typen:
-
-	cd client
-
-	npm run serve
-
-<a name="Kop2"></a>
+<a name="PlanVanAanpak"></a>
 # Plan van Aanpak
 
 >### Versiebeheer
 >| Versie | Datum | Wijziging/toevoeging |
 >|------|------|---------|
 >| 0.1 | 13-9 | Opzet eerste structuur
-
 ## Inhoud
 1. ### [Inleiding](#PlanVanAanpak/Inleiding)
 2. ### [Opdrachtomschrijving](#PlanVanAanpak/Opdrachtomschrijving)
 3. ### [Op te leveren producten](#PlanVanAanpak/Producten)
 4. ### [Project aanpak en fasering](#PlanVanAanpak/Projectaanpak)
+
+
 
 <a name="PlanVanAanpak/Inleiding"></a>
 ## 1. Inleiding
@@ -114,16 +74,19 @@ Daarbij is het van belang dat duidelijk wordt aangetoond met behulp van de produ
 Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als een demonstrator. Ontwerp het systeem op een modulaire manier, werk met interfaces en kies het juiste abstractieniveau werk met interfaces en kies het juiste abstractieniveau. Werk met .git en documenteer het systeem goed zodat het overdraagbaar is.
 
 ### shortlist aan te leveren producten
-- Dockerfile
+- Docker file
 - Overdrachtsdocument in Markdown:
 	- Minimale requirements:
 	- Ontwerp van software
+	- Screenshots van werkende versie
 	- Installatie handleiding met onder andere:
 		- Globale stappenplan installatie
 		- Gebruikte libraries en frameworks
-	- Resultaten
+		- Externe services als databases & aangesproken API’s
+	- Test data indien nodig
 - Source code in GitHub omgeving:
 	- Heldere structuur en naamgeving van code en bestanden
+	- Comments toegevoegd aan de code
 
 ### Randvoorwaarden
 - Python als backend
@@ -131,14 +94,10 @@ Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als
 - Werken met .git versiebeheer
 - GitHub repository van Zuyd gebruiken
 
-### Scope
-In het kader van de scope van dit
-project moet er tenminste voldaan worden aan een user-interface die de menselijke speler in staat stelt om
-te interacteren met zowel het spel als de intelligent agent. Daarnaast moet de intelligent agent gerealiseerd
-worden op modulaire manier, waarbij de opsplitsing van de modules van belang is.
+#### Scope
 
 ### Hulpmiddelen van Zuyd
-Vanuit Zuyd wordt de Github omgeving gefaciliteerd en ondersteuning aangeboden aan de studenten bij het (aan)maken van de Dockerfiles.
+Vanuit Zuyd wordt de Github omgeving gefaciliteerd en ondersteuning aangeboden aan de studenten bij het (aan)maken van de Docker Files.
 
 <a name="PlanVanAanpak/Projectaanpak"></a>
 ## 4. Projectaanpak/fasering
@@ -161,7 +120,7 @@ Binnen het project wordt een aangepaste variant gehanteerd om het project te beg
 
 
 
-<a name="Kop3"> </a>
+<a name="Onderzoek"> </a>
 # Onderzoeksrapport
 
 >### Versiebeheer
@@ -233,8 +192,7 @@ Winnowing is een techniek uit machine learning voor het leren van linear classif
 
 ### Alternatieven
 #### KNN methode
-![KNN picture](/lfs/Onderzoek/Figuur1.png)
-*Figuur 1 KNN methode*
+> # KNN EXAMPLE FOTO HIER
 
 Het **KNN**, K-nearest neighbors algorithm, berust zich op het opstellen van een model aan de hand van data, op basis van het model wordt een verwachting gegeven op basis van de verkregen K waarde oftewel beter gezegd de criteria. Een voorbeeld van een model is hier links te zien (Figuur 1 - KNN example). Enkele voor- en nadelen voor het toepassen van het KNN-algoritme is:
 
@@ -268,7 +226,7 @@ Hier ligt de nadruk op het in theorie, aangezien het doeleinde van het ‘wie be
 
 
 
-<a name="Kop4"></a>
+<a name="OntwerpDocument"></a>
 # Ontwerpdocument
 
 ## Inhoud
@@ -315,10 +273,9 @@ Om de architectuur zo concreet en gedetailleerd mogelijk te beschrijven is het z
 ### 2.2.1 Kern theorie
 
 Een beslissingsboom is niets meer dan een structuur van zowel takpunten (nodes) als bladeren (leafs). De boom kan zoals een echte boom getraceerd worden vanaf de wortel tot aan een blad. Dit wordt het doorlopen van de boom genoemd. Normaliter kan een boom op een bepaald punt meerdere vertakkingen hebben. Dit is in de theorie mogelijk, echter wordt er bij beslissingsbomen over het algemeen gewerkt met een binaire boomstructuur. Dit is een structuur die een ingraad van precies 1 heeft en een uitgraad van hoogstens 2. In het kader van de casus wordt een vraag gesteld bij iedere vertakking (node). Dit is een “waar” of “niet waar” vraag, waardoor een binaire boom meer doeltreffend is, omdat er telkens antwoord kan worden gegeven uit twee keuzes (waar, niet waar). Wanneer wordt gesproken over de complexiteit van het zoeken in een binaire zoekboom dan kan deze worden geformuleerd op basis van het beste mogelijke scenario en het slechtst mogelijke scenario, waarbij de complexiteit een O(n) en een O(log n) respectievelijk bedraagt. Hierbij is in het geval van het beste scenario de beslissingsboom volledig gebalanceerd, en in het geval van het slechtste scenario de boom helemaal niet gebalanceerd is (Cormen, Leiserson, Rivest, & Stein, 2009).
+## FIGUUR 1 BINAIRE BOOM
 
 
-![Figuur1](/lfs/Ontwerp/Figuur1.png)
-*Figuur 1 Binaire boom*
 ### 2.2.2 Vraag object
 
 De boom wordt gebouwd aan de hand van mogelijke vragen die gesteld kunnen worden op basis van de dataset. Hierbij worden de features getransformeerd naar vragen. Iedere vraag omvat een waarde, die correspondeert met een bepaalde feature, en een referentie naar de verzamelnaam van de desbetreffende feature.
@@ -327,8 +284,7 @@ Door middel van deze constructie kan een vraag worden opgesteld. Bijvoorbeeld: i
 
 Op deze manier van vragen formuleren kan er een duidelijke scheiding worden gemaakt binnen de dataset op basis van een vraag.
 
-![Figuur2](/lfs/Ontwerp/Figuur2.png)
-*Figuur 2 Question Object Class*
+## FIGUUR 2 Question Object Class
 
 
 ### 2.2.3 Blad object
@@ -337,9 +293,7 @@ Aan het uiteinde van iedere tak in de boomstructuur wordt het resultaat gerepres
 
 In het geval dat bepaalde rijen precies dezelfde features hebben, maar geen gelijke labels hebben, dan bestaat het resultaat uit meerdere geclassificeerde objecten. Dit is in de praktijk een ongewenst resultaat, want dan is er geen eenduidige classificatie. Echter is dit wel reden om aan de bel te trekken, want dit resultaat betekent dat er niet voldoende onderscheid is binnen de dataset. Aldus de dataset zal specifieker moeten worden ontleed in de vorm van verschillende features.
 
-
-![Figuur3](/lfs/Ontwerp/Figuur3.png)
-*Figuur 3 Node Object Class*
+## FIGUUR 3 Node Object Class
 
 
 
@@ -373,27 +327,13 @@ Deze pseudocode beschrijft het algoritme om de gini index te berekenen. Hierbij 
 Op basis van de Gini Index kan de onzekerheid van een vertakking worden berekend. Hierbij is de volgende stap om de informatie winst te bepalen, door de proportie van het aantal elementen in beide takken te vermenigvuldigen met de Gini Index van beide takken.
 
 
-	Algorithm informationGain_Gini (currentGini, true_branch, false_branch):
+	Algorithm informationGain (currentGini, true_branch, false_branch):
 
 		P = size(true_branch) / (size(true_branch) + size(false_branch))
 
 		Return currentGini – p * gini(true_branch) - (1 – p) * gini(false_branch)
 
-
 De parameters van deze functie zijn de huidige gini index waarde voor de desbetreffende dataset en de vertakkingen van de huidige dataset in zowel true als false branches. De variant op de information gain formule wordt geretourneerd aan het einde van de functie.
-
-Uiteraard kan de information entropy functie ook gehanteerd. Deze is een alternatief van de Gini Index, en ziet er als volgt uit in psuedocode. 
-
-	Algorithm informationGain_Entropy(true_branch, false_branch):
-		
-		p = len(true_branch) / (len(true_branch) + len(false_branch))
-		
-		if p == 0:
-			return - (1-p) * log2(1-p)
-		elif (1-p) == 0:
-			return - p * log2(p)
-		else:
-			return - p * log2(p) - (1-p) * log2(1-p)
 
 **Best mogelijke vraag vinden**
 
@@ -402,7 +342,7 @@ Om de best mogelijke vraag te vinden voor een set aan rijen moet de informatie w
 
 	Algorithm findBestQuestion(dataset):
 
-		bestGain = 0
+		bestGain = 0_
 
 		bestQuestion = null
 
@@ -429,14 +369,11 @@ Om de best mogelijke vraag te vinden voor een set aan rijen moet de informatie w
 Deze functie vind op basis van een bepaalde dataset de best mogelijke vraag om de dataset zo gebalanceerd mogelijk te scheiden, waarbij de vraag die de hoeveelheid vergaarde informatie genereerd wordt gemaximaliseerd.
 ### 2.2.5 Model diagram
 
-
-![Figuur4](/lfs/Ontwerp/Figuur4.png)
-*Figuur 4 Model weergave Besslissingsboom*
+## Figuur 4 Model weergave Besslissingsboom
 
 Door middel van het beschreven algoritme in 2.2.1, 2.2.2, 2.2.3 en 2.2.4 wordt de dataset opgesplitst en verkleind. Wanneer dit proces op een recursieve manier wordt uitgevoerd ontstaat een boomstructuur die bij iedere takpunt een vraagobject bevat en bij ieder blad een bladobject bevat. Wanneer de boom is gebouwd kan deze worden doorlopen van boven naar beneden, waarbij telkens een vraag gesteld wordt over het te classificeren object.
 
-![Figuur5](/lfs/Ontwerp/Figuur5.png)
-*Figuur 5 Class Diagram*
+## Figuur 5 Class Diagram
 
 In het bovenstaande class diagram is de structuur weergeven van de backend van het “Wie ben ik?" Spel. Deze begint bij een class genaamd Tree die een root bevat van het object type Node. Deze Node bevat op zichzelf weer een question van het type Quesion en een true-, false branch. Deze true- en false branches zijn op zich weer node’s / leafs. De question bevat een column namelijk de index. Daarnaast bevat de leaf class een prediction die aangeeft welke waarde er voorspeld wordt.
 
@@ -470,8 +407,7 @@ De backend zal worden opgedeeld in meerdere modules naar aanleiding van function
 
 De functionaliteit rondom de Flask server zal gescheiden worden van de functionaliteit van de Artificial intelligence. Binnen de AI-functionaliteit zal het Question object ook gescheiden worden, omdat deze niet alleen in de beslissingsboom wordt gebruikt, maar ook tijdens het stellen van een vraag door de gebruiker. De input van de gebruiker wordt namelijk omgezet in de vorm van een vraagobject die de juiste interface bevat om correct te functioneren met de beslissingsboom. Ten slotte worden ook enkele functies apart gezet die dienen als utilisatie functies en over het geheel gebruikt zullen worden.
 
-![Figuur6](/lfs/Ontwerp/Figuur6.png)
-*Figuur 6 Opdeling van de functionaliteit in modules*
+## FIguur 6 Opdeling van de functionaliteit in modules
 
 
 ### 3.1.2 API calls
@@ -480,18 +416,18 @@ Tijdens het werken met Flask is gebruik gemaakt van de lokale development server
 
 
 
-| **Nr.** | **Naam** | **API-call** | **Beschrijving** |
-|-----|-----|-----|-----|
-| **1**| /getAllCharacters | GET | De karakterset van alle karakters wordt verkregen in JSON formaat.
-| **2** | /character | GET | Zonder parameters retourneert deze call het huidige karakter van de speler. Wanneer de parameter “num” wordt meegegeven in de header met een bepaalde waarde, dan wordt het karakter dat correspondeert met die waarde gezet als het spelerskarakter. Deze call kiest ook een willekeurig karakter voor de AI en initialiseert de beslissingsboom.(vb: http://127.0.0.1:5000/character?num=3). |
-| **3** | /labels | GET | Retourneert iedere label/header aan de hand van de dataset. | 
+| **Nr.** | **Naam** | **API-call**|**Beschrijving** |
+|----|-----|----|----|----|
+ **1**|getAllCharacters|GET|De karakterset van alle karakters wordt verkregen in JSON formaat.
+| **2**|/character|GET|Zonder parameters retourneert deze call het huidige karakter van de speler. Wanneer de parameter “num” wordt meegegeven in de header met een bepaalde waarde, dan wordt het karakter dat correspondeert met die waarde gezet als het spelerskarakter. Deze call kiest ook een willekeurig karakter voor de AI en initialiseert de beslissingsboom.(vb: http://127.0.0.1:5000/character?num=3).
+|**3**|/labels|GET|Retourneert iedere label/header aan de hand van de dataset.|
 |**4**|/values?label={LABEL}|GET|Retourneert iedere unieke value aan de hand van een label. Hierbij is de parameter, “label”, die overeen moet komen met een label uit de set van labels/headers.|
 |**5**|/question?label={LABEL}&value={VALUE}|POST|Aan de hand van parameters “label” en “value”, wordt een vraag geformuleerd waarbij het resultaat een scheiding is van de spelersdataset. Hierbij wordt de gefilterde dataset geretourneerd.|
 |**6**|/aiquestion?answer={ANSWER}|GET|Retourneert de huidige vraag in de beslissingsboom. De parameter “answer” kan worden meegegeven om de volgende vraag te verkrijgen. Hierbij is de waarde van “answer” of 0 (false) of 1 (true).|
 |**7**|/tree|GET|Retourneert de gehele beslissingsboom mits deze al is geinitialiseerd.|
 |**8**|/images?id={ID}|GET|Retourneert een PNG-afbeelding van een karakter uit de dataset middels een bepaalde id meegegeven in de parameter “id”.|
 |**9**|/reset|GET|Iedere gebruikte variabele wordt op null gezet en de dataset wordt opnieuw geladen. Retourneert succes bericht wanneer de reset is geslaagd.|
-|**10**|/simulate?games={GAMES} &strat1={STRATEGY1} &strat2={STRATEGY2}|GET|Simuleert aan de hand van een variabel aantal "games" de hoeveelheid spellen waarbij 2 instanties van de intelligent agent worden gemaakt. Ook kan er worden meegegeven wat de te hanteren strategie is van zowel AI 1 als AI 2, middels "strategy1" en "strategy2" respectievelijk. Retourneert statistieken van de gespeelde games.|
+|**10**|/simulate?games={GAMES} &strat1={STRATEGY1} &strat2={STRATEGY2}|GET|Simuleert aan de hand van een variabel aantal GAMES de hoeveelheid spellen waarbij 2 instanties van de intelligent agent worden gemaakt. Ook kan er worden meegegeven wat de te hanteren strategie is van zowel AI 1 als AI 2, middels STRATEGY1 en STRATEGY2 respectievelijk. Retourneert statistieken van de gespeelde games.|
 
 
 <a name="OntwerpDocument/FrontEnd"></a>
@@ -507,29 +443,9 @@ Binnen de casus groep is gekozen voor vue vanwege het gebruiksgemak van de vueti
 
 In het onderstaand component diagram is weergeven hoe de structuur van het “Wie ben ik?” spel weergeven. Hierin is een splitsing gemaakt tussen frontend en backend. In de backend worden de acties verwerkt en data geretourneerd. Deze staat in koppeling met de frontend met behulp van drie interfaces. Deze uiten zich in de vorm van API’s in de code. In het frontend gedeelte zijn deze drie componenten aanwezig. Het Character toont en haalt alle characters op in de frontend met behulp van het IProcesCharacter interface, het question component haalt en verwerkt de vragen met behulp van IProcesQuestion en het laatste component, de DecisionTree, is met behulp van het IProcesDecisionTree interface opgesteld om de decision tree te achter halen en te verkrijgen.
 
-![Figuur7](/lfs/Ontwerp/Figuur7.png)
-*Figuur 7 Component Diagram*
+## Figuur 7 Component Diagram
 
-<a name="Kop5"></a>
-# Resultaten simulatie
-
-De onderliggende architectuur maakt het mogelijk om meerdere instanties van de intelligent agents te genereren. Het feit dat dit mogelijk is door middel van de onderliggende architectuur heeft geresulteerd in een component genaamd, SimulationModal. Binnen dit component kan men aangeven welke strategie agent 1 en agent 2 moeten gebruiken. De mogelijke strategie opties zijn de gini index, information entropy van log2 en information entropy van log10. Daarnaast dient te worden vermeld hoeveel games de agents tegen elkaar spelen. 
-
-![Simulatie screenshot](/lfs/Resultaat/simulate.PNG)
-*Figuur 1 Simulatie 100 games van agent1 (gini) en agent2 (entropy)*
-
-Figuur 1 toont de configureerbaarheid van de agents, waarbij agent 1 gebruik maakt van de gini index, terwijl agent 2 gebruik maakt van de information entropy. Het resultaat voor 100 games geeft een win ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren draagt bij aan de testbaarheid van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen. In het kader van figuur 3.4 is te zien dat agent 2 veel beter presteert dan agent 1, waarbij na meerdere simulaties de conclusie kan worden getrokken dat entropy voorziet van een betere manier van informatie meten dan de gini index.
-
-Uit nieuwsgierigheid zijn aanpassingen gemaakt aan de entropy functie, omdat deze functie voorheen alleen gebruikmaakte van de log2. Echter was het niet duidelijk of een aanpassing van het grondtal van de log het resultaat zou beïnvloeden. Vandaar dat er een kopie van de entropy functie is gemaakt die gebruik maakt van de log10 functie. Het resultaat van agents die gebruik maken van entropy log2 en entropy log10 is te zien in figuur 2. Hieruit, en na meerdere tests, volgt dat er weinig verschil te zien is in de win ratio van beide agents. 
-
-![Simulatie screenshot](/lfs/Resultaat/simulate2.png)
-*Figuur 2 Simulatie 1000 games van agent1 (log2 entropy) en agent2 (log10 entropy)*
-
-Uit (Hershy, 2019) blijkt dat de informatie onzuiverheid niet hetzelfde is bij beide methodieken. De gini index heeft een maximale onzuiverheid van 0.5 terwijl de information entropy een maximale onzuiverheid van 1 heeft. Hoewel beide methodieken een zuiverheid van 0 hebben.
-
-De modulariteit van het systeem stelt de onderzoeker in staat om meerdere functies toe te voegen die informatie metingen doen op basis van zuiverheid, waardoor dit ervoor zorgt dat er ruimte is voor vervolgonderzoeken naar betere of efficiëntere methoden. De webapplicatie als tool kan gebruikt worden als interface om deze methoden te testen. 
-
-<a name="Kop6"></a>
+<a name="Verwijzigingen"></a>
 # Verwijzingen
 
 ### Onderzoeksrapport
@@ -567,7 +483,4 @@ Rokach, L., & Maimon, O. (2005). _Top-down induction of decision trees classifie
 _Vuetifyjs_. (sd). Opgehaald van Vuetifyjs: https://vuetifyjs.com/en/
 
 Witten, I. H., Frank, E., & Hall, M. A. (2011). _Data mining : practical machine learning tools and techniques_. Opgehaald van https://archive.org/details/dataminingpracti00witt_966/page/n135/mode/2up
-
-### Resultaten simulatie
-Hershy, A. (2019). Gini Index vs Information Entropy. Opgehaald van towards data science: https://towardsdatascience.com/gini-index-vs-information-entropy-7a7e4fed3fcb
 
