@@ -511,18 +511,23 @@ In het onderstaand component diagram is weergeven hoe de structuur van het “Wi
 *Figuur 7 Component Diagram*
 
 <a name="Kop5"></a>
-# Resultaten
+# Resultaten simulatie
 
-Aan de hand van de onderliggende architectuur is het mogelijk gemaakt dat er een tweetal instanties van
-de intelligent agent zijn gegenereerd die beide in staat zijn om op adequate wijze het "Wie ben ik?" spel te
-spelen. Figuur 3.4 toont de configureerbaarheid van de agents, waarbij agent 1 gebruik maakt van de gini
-index, terwijl agent 2 gebruik maakt van de information entropy. Het resultaat voor 100 games geeft een win
-ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren draagt bij aan de testbaarheid
-van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen.
-In het kader van figuur 3.4 is te zien dat agent 2 vele malen beter presteert dan agent 1.
+De onderliggende architectuur maakt het mogelijk om meerdere instanties van de intelligent agents te genereren. Het feit dat dit mogelijk is door middel van de onderliggende architectuur heeft geresulteerd in een component genaamd, SimulationModal. Binnen dit component kan men aangeven welke strategie agent 1 en agent 2 moeten gebruiken. De mogelijke strategie opties zijn de gini index, information entropy van log2 en information entropy van log10. Daarnaast dient te worden vermeld hoeveel games de agents tegen elkaar spelen. 
 
 ![Simulatie screenshot](/lfs/Resultaat/simulate.PNG)
-*Figuur 1 Simulatie 2 AI's*
+*Figuur 1 Simulatie 100 games van agent1 (gini) en agent2 (entropy)*
+
+Figuur 1 toont de configureerbaarheid van de agents, waarbij agent 1 gebruik maakt van de gini index, terwijl agent 2 gebruik maakt van de information entropy. Het resultaat voor 100 games geeft een win ratio van 0.890 voor agent 2. Deze manier van grote aantallen games simuleren draagt bij aan de testbaarheid van de intelligente systemen. Hierdoor kunnen aannames worden getrokken en theorieën worden bewezen. In het kader van figuur 3.4 is te zien dat agent 2 veel beter presteert dan agent 1, waarbij na meerdere simulaties de conclusie kan worden getrokken dat entropy voorziet van een betere manier van informatie meten dan de gini index.
+
+Uit nieuwsgierigheid zijn aanpassingen gemaakt aan de entropy functie, omdat deze functie voorheen alleen gebruikmaakte van de log2. Echter was het niet duidelijk of een aanpassing van het grondtal van de log het resultaat zou beïnvloeden. Vandaar dat er een kopie van de entropy functie is gemaakt die gebruik maakt van de log10 functie. Het resultaat van agents die gebruik maken van entropy log2 en entropy log10 is te zien in figuur 2. Hieruit, en na meerdere tests, volgt dat er weinig verschil te zien is in de win ratio van beide agents. 
+
+![Simulatie screenshot](/lfs/Resultaat/simulate2.PNG)
+*Figuur 2 Simulatie 1000 games van agent1 (log2 entropy) en agent2 (log10 entropy)*
+
+Uit (Hershy, 2019) blijkt dat de informatie onzuiverheid niet hetzelfde is bij beide methodieken. De gini index heeft een maximale onzuiverheid van 0.5 terwijl de information entropy een maximale onzuiverheid van 1 heeft. Hoewel beide methodieken een zuiverheid van 0 hebben.
+
+De modulariteit van het systeem stelt de onderzoeker in staat om meerdere functies toe te voegen die informatie metingen doen op basis van zuiverheid, waardoor dit ervoor zorgt dat er ruimte is voor vervolgonderzoeken naar betere of efficiëntere methoden. De webapplicatie als tool kan gebruikt worden als interface om deze methoden te testen. 
 
 <a name="Kop6"></a>
 # Verwijzingen
@@ -562,3 +567,7 @@ Rokach, L., & Maimon, O. (2005). _Top-down induction of decision trees classifie
 _Vuetifyjs_. (sd). Opgehaald van Vuetifyjs: https://vuetifyjs.com/en/
 
 Witten, I. H., Frank, E., & Hall, M. A. (2011). _Data mining : practical machine learning tools and techniques_. Opgehaald van https://archive.org/details/dataminingpracti00witt_966/page/n135/mode/2up
+
+### Resultaten simulatie
+Hershy, A. (2019). Gini Index vs Information Entropy. Opgehaald van towards data science: https://towardsdatascience.com/gini-index-vs-information-entropy-7a7e4fed3fcb
+
