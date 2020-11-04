@@ -370,7 +370,7 @@ Deze pseudocode beschrijft het algoritme om de gini index te berekenen. Hierbij 
 Op basis van de Gini Index kan de onzekerheid van een vertakking worden berekend. Hierbij is de volgende stap om de informatie winst te bepalen, door de proportie van het aantal elementen in beide takken te vermenigvuldigen met de Gini Index van beide takken.
 
 
-	Algorithm informationGain (currentGini, true_branch, false_branch):
+	Algorithm informationGain_Gini (currentGini, true_branch, false_branch):
 
 		P = size(true_branch) / (size(true_branch) + size(false_branch))
 
@@ -378,6 +378,19 @@ Op basis van de Gini Index kan de onzekerheid van een vertakking worden berekend
 
 
 De parameters van deze functie zijn de huidige gini index waarde voor de desbetreffende dataset en de vertakkingen van de huidige dataset in zowel true als false branches. De variant op de information gain formule wordt geretourneerd aan het einde van de functie.
+
+Uiteraard kan de information entropy functie ook gehanteerd. Deze is een alternatief van de Gini Index, en ziet er als volgt uit in psuedocode. 
+
+	Algorithm informationGain_Entropy(true_branch, false_branch):
+		
+		p = len(true_branch) / (len(true_branch) + len(false_branch))
+		
+		if p == 0:
+			return - (1-p) * log2(1-p)
+		elif (1-p) == 0:
+			return - p * log2(p)
+		else:
+			return - p * log2(p) - (1-p) * log2(1-p)
 
 **Best mogelijke vraag vinden**
 
