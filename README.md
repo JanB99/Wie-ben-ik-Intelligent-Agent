@@ -122,7 +122,6 @@ Het product moet gerealiseerd worden in Python en moet ingezet kunnen worden als
 	- Test data indien nodig
 - Source code in GitHub omgeving:
 	- Heldere structuur en naamgeving van code en bestanden
-	- Comments toegevoegd aan de code
 
 ### Randvoorwaarden
 - Python als backend
@@ -137,7 +136,7 @@ te interacteren met zowel het spel als de intelligent agent. Daarnaast moet de i
 worden op modulaire manier, waarbij de opsplitsing van de modules van belang is.
 
 ### Hulpmiddelen van Zuyd
-Vanuit Zuyd wordt de Github omgeving gefaciliteerd en ondersteuning aangeboden aan de studenten bij het (aan)maken van de Docker Files.
+Vanuit Zuyd wordt de Github omgeving gefaciliteerd en ondersteuning aangeboden aan de studenten bij het (aan)maken van de Dockerfiles.
 
 <a name="PlanVanAanpak/Projectaanpak"></a>
 ## 4. Projectaanpak/fasering
