@@ -23,7 +23,7 @@ Artificial Intelligence (BD02)
 
 **Organisatie**:
 
-Shannen Dols & Jim Bemelen
+Shannen Dolls & Jim Bemelen
 
 
 # Inhoud
