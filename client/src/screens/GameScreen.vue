@@ -179,8 +179,8 @@ export default {
     };
   },
   methods: {
-    onGameStart(id) {
-      axios.get(`http://127.0.0.1:5000/character?num=${id}`).then((res) => {
+    onGameStart(id, strategy) {
+      axios.get(`http://127.0.0.1:5000/character?num=${id}&AIstrat=${strategy}`).then((res) => {
         this.player = res.data[0];
       });
     },

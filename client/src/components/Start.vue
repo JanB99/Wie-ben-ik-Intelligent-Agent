@@ -13,6 +13,7 @@
             'entropy logE',
           ]"
           outlined
+          :error="isError"
           color="accent"
           item-color="accent"
           label="Kies de strategie van de intelligent agent"
@@ -83,7 +84,8 @@ export default {
       playerCharacter: null,
       isOpen: false,
       ai: null,
-      strategy: ""
+      strategy: "",
+      isError: false,
     };
   },
   methods: {
@@ -96,13 +98,18 @@ export default {
       return `http://127.0.0.1:5000/images?id=${id}`;
     },
     selectCharacter(char) {
-      this.playerCharacter = char;
-      this.isOpen = true;
+      if (this.strategy != "") {
+        this.playerCharacter = char;
+        this.isOpen = true;
+        this.isError = false
+      } else {
+        this.isError = true;
+      }
     },
     startGame(char) {
       let id = char[char.length - 1];
       this.isOpen = false;
-      this.onGameStart(id);
+      this.onGameStart(id, this.strategy);
     },
   },
   filters: {

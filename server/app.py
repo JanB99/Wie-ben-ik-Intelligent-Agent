@@ -48,6 +48,7 @@ def character():
     global player_character, ai_character, tree
 
     arg = request.args.get('num')
+    strat = request.args.get('AIstrat')
     if arg:
         index = 0
         for (i, row) in enumerate(playerDataset):
@@ -58,7 +59,7 @@ def character():
         ai_character = playerDataset[rand_index]
         del dataset[rand_index]
         
-        tree = Tree(dataset, headers)
+        tree = Tree(dataset, headers, strategy=strat)
     return jsonify(player_character, ai_character)
 
 @app.route('/labels', methods=['GET'])
