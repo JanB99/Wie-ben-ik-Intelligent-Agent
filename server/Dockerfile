@@ -5,14 +5,16 @@ RUN adduser -D wiebenik
 WORKDIR /casus-groep7/
 
 COPY requirements.txt requirements.txt
-RUN python -m venv venv
-RUN venv/bin/pip install -r requirements.txt
+RUN python -m venv env
+RUN env/bin/pip install -r requirements.txt
 
-COPY server server
+COPY . .
+RUN chmod +x boot.sh
 
-ENV FLASK_APP server/app.py
+ENV FLASK_APP app.py
 
 RUN chown -R wiebenik:wiebenik ./
 USER wiebenik
 
 EXPOSE 5000
+ENTRYPOINT ["./boot.sh"]

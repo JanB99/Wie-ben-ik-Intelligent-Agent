@@ -133,4 +133,4 @@ def simulate_AI():
 
     return jsonify(results)
 
-app.run()
+app.run(host='0.0.0.0')
