@@ -54,7 +54,7 @@ backend: Flask
 
 ## Startup
 Om het programma op te starten zal eerst de back end opgestart moeten worden. daarna zal de Front End opgestart worden. Dit wordt vereenvoudigd door het gebruik van Docker. 
-typ het volgende Docker commando in de terminal van de directory om zowel de front als backend te starten in een geisoleerde omgeving:
+Typ het volgende Docker commando in de terminal van de directory om zowel de front als backend te starten in een geisoleerde omgeving:
 	
 	docker-compose up --build
 	
