@@ -30,7 +30,7 @@ class Node:
 
 
 class Tree:
-    def __init__(self, rows, headers, strategy="entropy2"):
+    def __init__(self, rows, headers, strategy="entropy log2"):
         self.headers = headers
         self.strategy = strategy
         self.root = self.create_tree(rows)
@@ -64,11 +64,13 @@ class Tree:
 
                 true, false = partition(rows, question)
 
-                if self.strategy == "gini":
+                if self.strategy == "gini index":
                     info_gain = self.information_gain_gini(current, true, false)
-                elif self.strategy == "entropy2":
+                elif self.strategy == "entropy log2":
                     info_gain = self.information_gain_entropy2(true, false)
-                elif self.strategy == "entropy10":
+                elif self.strategy == "entropy log10":
+                    info_gain = self.information_gain_entropy10(true, false)
+                elif self.strategy == "entropy logE":
                     info_gain = self.information_gain_entropy10(true, false)
 
                 if info_gain >= best_gain:
@@ -76,6 +78,15 @@ class Tree:
                     best_question = question
 
         return best_gain, best_question
+
+    def information_gain_entropyE(self, left, right):
+        p = len(left) / (len(left) + len(right))
+        if p == 0:
+            return - (1-p) * math.log1p(1-p)
+        elif (1-p) == 0:
+            return - p * math.log1p(p)
+        else:
+            return - p * math.log1p(p) - (1-p) * math.log1p(1-p)
 
     def information_gain_entropy2(self, left, right):
         p = len(left) / (len(left) + len(right))

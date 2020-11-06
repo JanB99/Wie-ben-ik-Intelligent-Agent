@@ -3,6 +3,20 @@
     <v-container>
       <v-card class="ma-2 pa-6 primary elevation-10" outlined rounded>
         <h1 class="text-center">Kies een karakter</h1>
+        <v-select
+          class="mx-16 mt-3"
+          v-model="strategy"
+          :items="[
+            'gini index',
+            'entropy log2',
+            'entropy log10',
+            'entropy logE',
+          ]"
+          outlined
+          color="accent"
+          item-color="accent"
+          label="Kies de strategie van de intelligent agent"
+        ></v-select>
         <v-layout row wrap justify-center class="mt-5">
           <v-flex
             v-for="(char, index) in characters"
@@ -30,7 +44,7 @@
                     </v-row>
                   </template>
                 </v-img>
-                {{ char[char.length - 2] | capitalize}}
+                {{ char[char.length - 2] | capitalize }}
               </v-card>
             </v-hover>
           </v-flex>
@@ -42,7 +56,7 @@
       <Modal
         :character="playerCharacter"
         :getImage="getImage"
-        :onCancel="() => isOpen = false"
+        :onCancel="() => (isOpen = false)"
         :onConfirm="startGame"
         :confirmText="'Bevestig karakter'"
         :headerText="'Je gekozen karakter'"
@@ -68,7 +82,8 @@ export default {
       characters: [],
       playerCharacter: null,
       isOpen: false,
-      ai: null
+      ai: null,
+      strategy: ""
     };
   },
   methods: {
@@ -84,23 +99,23 @@ export default {
       this.playerCharacter = char;
       this.isOpen = true;
     },
-    startGame(char){
-      let id = char[char.length - 1]
-      this.isOpen = false
-      this.onGameStart(id)
+    startGame(char) {
+      let id = char[char.length - 1];
+      this.isOpen = false;
+      this.onGameStart(id);
     },
   },
   filters: {
-    capitalize(value){
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
+    capitalize(value) {
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
   },
   created() {
     this.getAllCharacters();
   },
-  mounted(){
+  mounted() {
     this.getAllCharacters();
-  }
+  },
 };
 </script>
 
